@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Check } from "lucide-react";
 import Reveal from "./Reveal";
 
 const QUALS = [
@@ -46,8 +47,8 @@ export default function About() {
           <ul className="mt-7 space-y-3">
             {QUALS.map((q) => (
               <li key={q} className="flex items-start gap-3 text-sm text-navy">
-                <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-gold-gradient text-[11px] font-bold text-navy">
-                  ✓
+                <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-gold-gradient text-navy">
+                  <Check className="h-3 w-3" strokeWidth={3} />
                 </span>
                 {q}
               </li>

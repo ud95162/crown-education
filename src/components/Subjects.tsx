@@ -3,17 +3,29 @@
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  Calculator,
+  Building2,
+  Handshake,
+  Rocket,
+  BookOpen,
+  Sigma,
+  FlaskConical,
+  Megaphone,
+  GraduationCap,
+  type LucideIcon,
+} from "lucide-react";
 import { LEVELS } from "@/lib/content";
 
-const ICONS: Record<string, string> = {
-  Accounting: "📊",
-  "Business Studies": "🏢",
-  "Business Consultancy": "🤝",
-  "Professional Development": "🚀",
-  English: "📖",
-  Mathematics: "➗",
-  Science: "🔬",
-  Marketing: "📈",
+const ICONS: Record<string, LucideIcon> = {
+  Accounting: Calculator,
+  "Business Studies": Building2,
+  "Business Consultancy": Handshake,
+  "Professional Development": Rocket,
+  English: BookOpen,
+  Mathematics: Sigma,
+  Science: FlaskConical,
+  Marketing: Megaphone,
 };
 
 export default function Subjects() {
@@ -120,18 +132,21 @@ export default function Subjects() {
                 </p>
 
                 <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {level.subjects.map((s, si) => (
-                    <motion.div
-                      key={s}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.08 + si * 0.05 }}
-                      className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 transition-colors hover:border-gold/50 hover:bg-white/[0.07]"
-                    >
-                      <span className="text-xl">{ICONS[s] ?? "🎓"}</span>
-                      <span className="text-sm font-medium">{s}</span>
-                    </motion.div>
-                  ))}
+                  {level.subjects.map((s, si) => {
+                    const Icon = ICONS[s] ?? GraduationCap;
+                    return (
+                      <motion.div
+                        key={s}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.08 + si * 0.05 }}
+                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 transition-colors hover:border-gold/50 hover:bg-white/[0.07]"
+                      >
+                        <Icon className="h-5 w-5 flex-none text-gold" strokeWidth={2} />
+                        <span className="text-sm font-medium">{s}</span>
+                      </motion.div>
+                    );
+                  })}
                 </div>
 
                 <div className="mt-7 border-t border-white/10 pt-6">

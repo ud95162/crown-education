@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Landmark, Globe2, Briefcase, type LucideIcon } from "lucide-react";
 import { PILLARS } from "@/lib/content";
+
+const PILLAR_ICONS: LucideIcon[] = [Landmark, Globe2, Briefcase];
 
 const draw = {
   hidden: { pathLength: 0, opacity: 0 },
@@ -90,7 +93,9 @@ export default function Pillars() {
 
           {/* --- Pathway nodes --- */}
           <div className="grid gap-6 md:grid-cols-3">
-            {PILLARS.map((p, i) => (
+            {PILLARS.map((p, i) => {
+              const Icon = PILLAR_ICONS[i] ?? Landmark;
+              return (
               <motion.article
                 key={p.title}
                 initial={{ opacity: 0, y: 24 }}
@@ -102,8 +107,11 @@ export default function Pillars() {
                 {/* connection dot */}
                 <span className="absolute -top-1.5 left-1/2 hidden h-3 w-3 -translate-x-1/2 rounded-full bg-gold ring-4 ring-[#f7f8fa] lg:block" />
 
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-navy text-3xl transition-colors group-hover:bg-gold-gradient">
-                  {p.flag}
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-navy transition-colors group-hover:bg-gold-gradient">
+                  <Icon
+                    className="h-7 w-7 text-gold transition-colors group-hover:text-navy"
+                    strokeWidth={1.8}
+                  />
                 </div>
                 <h3 className="mt-5 font-serif text-2xl font-semibold text-navy">
                   {p.title}
@@ -120,7 +128,8 @@ export default function Pillars() {
                   ))}
                 </div>
               </motion.article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { Phone, Mail, MapPin, type LucideIcon } from "lucide-react";
 import Reveal from "./Reveal";
 import { SUBJECTS } from "@/lib/content";
 
@@ -62,9 +63,9 @@ export default function Contact() {
               </p>
 
           <div className="mt-8 space-y-4">
-            <ContactRow icon="📞" label="Phone / WhatsApp" value="+94 70 000 0000" />
-            <ContactRow icon="✉️" label="Email" value="hello@crowned.lk" />
-            <ContactRow icon="📍" label="Location" value="Sri Lanka" />
+            <ContactRow icon={Phone} label="Phone / WhatsApp" value="+94 70 000 0000" />
+            <ContactRow icon={Mail} label="Email" value="hello@crowned.lk" />
+            <ContactRow icon={MapPin} label="Location" value="Sri Lanka" />
           </div>
         </Reveal>
 
@@ -188,18 +189,18 @@ function Field({
 }
 
 function ContactRow({
-  icon,
+  icon: Icon,
   label,
   value,
 }: {
-  icon: string;
+  icon: LucideIcon;
   label: string;
   value: string;
 }) {
   return (
     <div className="flex items-center gap-4">
-      <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/10 text-lg">
-        {icon}
+      <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/30 bg-white/10">
+        <Icon className="h-5 w-5 text-gold" strokeWidth={2} />
       </span>
       <div>
         <div className="text-xs uppercase tracking-wider text-white/50">

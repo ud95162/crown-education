@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { GraduationCap } from "lucide-react";
 import { STATS } from "@/lib/content";
 
 export default function Hero() {
@@ -100,7 +101,9 @@ export default function Hero() {
             className="absolute bottom-16 left-0 z-20 rounded-2xl bg-white/95 px-5 py-4 shadow-card backdrop-blur lg:left-0"
           >
             <div className="flex items-center gap-3">
-              <span className="text-2xl">🎓</span>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy">
+                <GraduationCap className="h-5 w-5 text-gold" strokeWidth={2} />
+              </span>
               <div>
                 <div className="font-serif text-lg font-semibold text-navy">
                   Edexcel · Cambridge
