@@ -3,53 +3,43 @@
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Calculator,
-  Building2,
-  Handshake,
-  Rocket,
-  BookOpen,
-  Sigma,
-  FlaskConical,
-  Megaphone,
-  GraduationCap,
-  type LucideIcon,
-} from "lucide-react";
-import { LEVELS } from "@/lib/content";
+import { ArrowUpRight } from "lucide-react";
+import { SUBJECT_FILTERS } from "@/lib/content";
 
-const ICONS: Record<string, LucideIcon> = {
-  Accounting: Calculator,
-  "Business Studies": Building2,
-  "Business Consultancy": Handshake,
-  "Professional Development": Rocket,
-  English: BookOpen,
-  Mathematics: Sigma,
-  Science: FlaskConical,
-  Marketing: Megaphone,
+// Placeholder cover images — swap these for the tutor's own photos later.
+const U = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=640&q=70`;
+const IMAGES: Record<string, string> = {
+  Accounting: U("photo-1554224155-6726b3ff858f"),
+  "Business Studies": U("photo-1486406146926-c627a92ad1ab"),
+  "Business Consultancy": U("photo-1600880292203-757bb62b4baf"),
+  "Professional Development": U("photo-1552581234-26160f608093"),
+  English: U("photo-1519682337058-a94d519337bc"),
+  Mathematics: U("photo-1509228468518-180dd4864904"),
+  Science: U("photo-1532094349884-543bc11b234d"),
+  Marketing: U("photo-1460925895917-afdab827c52f"),
 };
 
 export default function Subjects() {
   const [active, setActive] = useState(0);
-  const level = LEVELS[active];
+  const filter = SUBJECT_FILTERS[active];
 
   return (
     <section
       id="subjects"
-      className="relative overflow-hidden bg-navy-deep py-20 text-white lg:py-28"
+      className="section-pad relative overflow-hidden bg-navy-deep text-snow"
     >
       {/* layered background */}
       <div className="pattern-grid pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-gold/15 blur-[130px]" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#1c3f7a]/50 blur-[130px]" />
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-gold/5 blur-[110px]" />
-      {/* faint crest watermark */}
+      <div className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-gold/12 blur-[130px]" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#1c3f7a]/40 blur-[130px]" />
       <Image
         src="/images/crest.png"
         alt=""
         aria-hidden="true"
         width={520}
         height={590}
-        className="pointer-events-none absolute -bottom-16 right-0 hidden w-[360px] opacity-[0.05] lg:block"
+        className="pointer-events-none absolute -bottom-16 right-0 hidden w-[340px] opacity-[0.04] lg:block"
       />
 
       <div className="container-x relative">
@@ -58,115 +48,116 @@ export default function Subjects() {
             <span className="h-px w-8 bg-gold" />
             What You Can Learn
           </span>
-          <h2 className="mt-4 font-serif text-3xl font-semibold sm:text-4xl lg:text-[2.75rem]">
-            Subjects &amp; Levels
-          </h2>
-          <p className="mt-4 text-white/70">
-            Choose a level to see the subjects and curricula covered.
+          <h2 className="section-title mt-4">Subjects &amp; Curricula</h2>
+          <p className="mt-4 text-mist">
+            Filter by pathway to explore the subjects offered across each
+            curriculum.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[300px_1fr] lg:gap-12">
-          {/* Level selector */}
+        {/* pill-tab filter */}
+        <div className="mt-10 flex justify-center">
           <div
             role="tablist"
-            aria-label="Levels"
-            className="flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0"
+            aria-label="Curriculum pathways"
+            className="glass inline-flex flex-wrap justify-center gap-1 rounded-full p-1.5"
           >
-            {LEVELS.map((l, i) => {
+            {SUBJECT_FILTERS.map((f, i) => {
               const selected = i === active;
               return (
                 <button
-                  key={l.key}
+                  key={f.key}
                   role="tab"
                   aria-selected={selected}
                   onClick={() => setActive(i)}
-                  className={`group relative flex-none rounded-2xl border px-5 py-4 text-left transition-all duration-300 lg:flex-1 ${
-                    selected
-                      ? "border-gold/60 bg-white/[0.06]"
-                      : "border-white/10 bg-white/[0.02] hover:border-white/25"
+                  className={`relative rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 ${
+                    selected ? "text-navy-deep" : "text-mist hover:text-snow"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`flex h-9 w-9 flex-none items-center justify-center rounded-lg font-serif text-sm font-bold transition-colors ${
-                        selected
-                          ? "bg-gold-gradient text-navy"
-                          : "bg-white/10 text-white/70"
-                      }`}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <div className="font-serif text-lg font-semibold leading-tight">
-                        {l.name}
-                      </div>
-                      <div className="hidden text-xs text-white/55 sm:block">
-                        {l.tagline}
-                      </div>
-                    </div>
-                  </div>
+                  {selected && (
+                    <motion.span
+                      layoutId="pill"
+                      className="absolute inset-0 -z-10 rounded-full bg-gold-gradient"
+                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                    />
+                  )}
+                  {f.label}
+                  <span
+                    className={`ml-2 hidden text-xs font-normal sm:inline ${
+                      selected ? "text-navy-deep/70" : "text-mist/60"
+                    }`}
+                  >
+                    {f.caption}
+                  </span>
                 </button>
               );
             })}
           </div>
+        </div>
 
-          {/* Panel */}
-          <div className="min-h-[320px] rounded-3xl border border-white/10 bg-white/[0.03] p-7 lg:p-9">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={level.key}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="font-serif text-2xl font-semibold text-gold-light">
-                    {level.name}
-                  </h3>
-                  <span className="text-sm text-white/55">{level.tagline}</span>
-                </div>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/70">
-                  {level.desc}
-                </p>
+        {/* horizontal scrolling cards */}
+        <div className="mt-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={filter.key}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
+              className="subject-scroll flex snap-x gap-4 overflow-x-auto pb-4"
+            >
+              {filter.subjects.map((s, si) => {
+                return (
+                  <motion.div
+                    key={s}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 + si * 0.05 }}
+                    className="group card-surface flex w-52 flex-none snap-start flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-lift sm:w-56"
+                  >
+                    {/* top image */}
+                    <div className="relative h-28 overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={IMAGES[s]}
+                        alt={s}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy-surface via-navy-surface/30 to-transparent" />
+                    </div>
+                    {/* bottom content */}
+                    <div className="flex items-center justify-between gap-2 px-4 py-3">
+                      <div>
+                        <h3 className="font-display text-base font-bold leading-snug text-snow">
+                          {s}
+                        </h3>
+                        <p className="mt-0.5 text-[11px] text-mist">
+                          {filter.caption}
+                        </p>
+                      </div>
+                      <ArrowUpRight className="h-4 w-4 flex-none text-mist/40 transition-colors group-hover:text-gold" />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-                <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {level.subjects.map((s, si) => {
-                    const Icon = ICONS[s] ?? GraduationCap;
-                    return (
-                      <motion.div
-                        key={s}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.08 + si * 0.05 }}
-                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 transition-colors hover:border-gold/50 hover:bg-white/[0.07]"
-                      >
-                        <Icon className="h-5 w-5 flex-none text-gold" strokeWidth={2} />
-                        <span className="text-sm font-medium">{s}</span>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-
-                <div className="mt-7 border-t border-white/10 pt-6">
-                  <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/45">
-                    Curricula
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {level.curricula.map((c) => (
-                      <span
-                        key={c}
-                        className="rounded-full border border-gold/40 px-4 py-1.5 text-sm text-gold-light"
-                      >
-                        {c}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+        {/* level chips */}
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-3 border-t border-white/10 pt-8 text-sm">
+          <span className="text-xs uppercase tracking-wider text-mist/60">
+            Available for
+          </span>
+          {["O/Level", "A/Level", "Professional"].map((c) => (
+            <span
+              key={c}
+              className="border border-gold/40 px-4 py-1.5 text-gold-light"
+            >
+              {c}
+            </span>
+          ))}
         </div>
       </div>
     </section>

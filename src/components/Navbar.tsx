@@ -17,15 +17,15 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 shadow-md backdrop-blur supports-[backdrop-filter]:bg-white/85"
-          : "bg-white"
+          ? "border-white/10 bg-navy/85 backdrop-blur"
+          : "border-transparent bg-transparent"
       }`}
     >
       <nav className="container-x flex h-20 items-center justify-between">
         <a href="#home" aria-label="CrownEd home">
-          <Logo variant="dark" />
+          <Logo variant="light" />
         </a>
 
         <div className="hidden items-center gap-8 lg:flex">
@@ -33,19 +33,19 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-navy/75 transition-colors hover:text-gold"
+              className="text-sm font-medium text-mist transition-colors hover:text-gold"
             >
               {l.label}
             </a>
           ))}
           <a href="#contact" className="btn-gold">
-            Book a Consultation
+            Apply Now
           </a>
         </div>
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="text-navy lg:hidden"
+          className="text-snow lg:hidden"
           aria-label="Toggle menu"
           aria-expanded={open}
         >
@@ -71,14 +71,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="border-t border-navy/10 bg-white px-6 pb-6 pt-2 shadow-md lg:hidden">
+        <div className="border-t border-white/10 bg-navy px-6 pb-6 pt-2 lg:hidden">
           <div className="flex flex-col gap-1">
             {NAV_LINKS.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-navy/80 hover:bg-navy/5 hover:text-gold"
+                className="rounded-xl px-3 py-3 text-sm font-medium text-mist hover:bg-white/5 hover:text-gold"
               >
                 {l.label}
               </a>
@@ -88,7 +88,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="btn-gold mt-3"
             >
-              Book a Consultation
+              Apply Now
             </a>
           </div>
         </div>

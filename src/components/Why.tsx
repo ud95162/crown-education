@@ -5,7 +5,7 @@ import { WHY_POINTS } from "@/lib/content";
 
 export default function Why() {
   return (
-    <section id="why" className="bg-white py-20 lg:py-28">
+    <section id="why" className="section-pad bg-navy">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
           <span className="eyebrow justify-center">
@@ -15,21 +15,19 @@ export default function Why() {
           <h2 className="section-title mt-4">
             More than tuition — a path to your best
           </h2>
-          <p className="mt-4 text-ink">
+          <p className="mt-4 text-mist">
             Every student follows the same proven journey with CrownEd.
           </p>
         </div>
 
         <div className="relative mx-auto mt-16 max-w-3xl">
-          {/* base track */}
-          <div className="absolute left-7 top-7 bottom-7 w-0.5 -translate-x-1/2 bg-navy/10" />
-          {/* animated gold fill that "draws" on scroll */}
+          <div className="absolute left-7 top-7 bottom-7 w-px -translate-x-1/2 bg-white/10" />
           <motion.div
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true, margin: "-120px" }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute left-7 top-7 bottom-7 w-0.5 origin-top -translate-x-1/2 bg-gold-gradient"
+            className="absolute left-7 top-7 bottom-7 w-px origin-top -translate-x-1/2 bg-gold-gradient"
           />
 
           <ol className="relative space-y-10">
@@ -46,17 +44,15 @@ export default function Why() {
                 }}
                 className="group relative flex items-start gap-6"
               >
-                {/* node */}
                 <div className="relative z-10 flex-none">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-gold bg-white font-serif text-lg font-bold text-navy shadow-gold transition-colors duration-300 group-hover:bg-gold-gradient">
+                  <span className="flex h-14 w-14 items-center justify-center border-2 border-gold bg-navy-surface font-display text-lg font-bold text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-navy-deep">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
 
-                {/* content */}
-                <div className="flex-1 rounded-2xl border border-transparent bg-[#f7f8fa] px-6 py-5 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-gold/40 group-hover:bg-white group-hover:shadow-card">
+                <div className="flex-1 card-surface px-6 py-5 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-gold/40 group-hover:shadow-lift">
                   <div className="flex items-center gap-3">
-                    <h3 className="font-serif text-xl font-semibold text-navy">
+                    <h3 className="font-display text-lg font-bold text-snow">
                       {p.title}
                     </h3>
                     {i < WHY_POINTS.length - 1 && (
@@ -65,7 +61,7 @@ export default function Why() {
                       </span>
                     )}
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-ink">
+                  <p className="mt-2 text-sm leading-relaxed text-mist">
                     {p.desc}
                   </p>
                 </div>

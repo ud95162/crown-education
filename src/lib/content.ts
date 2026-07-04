@@ -40,6 +40,50 @@ export const SUBJECTS = [
   "Marketing",
 ];
 
+// WhatsApp quick-action (update to the real number, digits only, country code first)
+export const WHATSAPP_NUMBER = "94700000000";
+export const WHATSAPP_MESSAGE =
+  "Hi CrownEd! I'd like to apply for a class. Please share the details.";
+
+// Subjects grouped by pathway for the interactive matrix
+export const SUBJECT_FILTERS = [
+  {
+    key: "local",
+    label: "Local",
+    caption: "Sri Lankan Curriculum",
+    subjects: [
+      "Mathematics",
+      "Science",
+      "English",
+      "Accounting",
+      "Business Studies",
+    ],
+  },
+  {
+    key: "uk",
+    label: "UK",
+    caption: "Edexcel / Cambridge",
+    subjects: [
+      "Accounting",
+      "Business Studies",
+      "Marketing",
+      "English",
+      "Mathematics",
+    ],
+  },
+  {
+    key: "pro",
+    label: "Professional",
+    caption: "Career Courses",
+    subjects: [
+      "Business Consultancy",
+      "Professional Development",
+      "Marketing",
+      "Accounting",
+    ],
+  },
+] as const;
+
 export const LEVELS = [
   {
     key: "ol",
@@ -103,8 +147,10 @@ export const WHY_POINTS = [
   },
 ];
 
+// NOTE: placeholder figures — update with the tutor's real numbers.
 export const STATS = [
-  { value: "8", suffix: "+", label: "Subjects taught" },
-  { value: "3", suffix: "", label: "Curricula covered" },
-  { value: "O/L · A/L · Pro", suffix: "", label: "Levels supported" },
+  { value: 10, suffix: "+", label: "Years Experience", caption: "Teaching across curricula" },
+  { value: 500, suffix: "+", label: "Students Taught", caption: "And counting" },
+  { value: 98, suffix: "%", label: "Pass Rate", caption: "Exam success" },
+  { value: 8, suffix: "+", label: "Subjects", caption: "Local · UK · Professional" },
 ];

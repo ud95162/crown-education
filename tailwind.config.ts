@@ -8,28 +8,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gold: {
-          DEFAULT: "#D4A12A", // Primary Gold
-          light: "#E7C768", // Accent Gold
-        },
+        // Deep corporate navy family
         navy: {
-          DEFAULT: "#0B234B", // Primary Navy
-          deep: "#081a3a",
+          DEFAULT: "#0B192C",
+          deep: "#060F1C",
+          surface: "#0F2135",
+          line: "#1C2E44",
         },
-        ink: "#444444", // Dark Gray body text
+        // Metallic champagne gold
+        gold: {
+          DEFAULT: "#D4AF37",
+          light: "#E6C972",
+        },
+        // Crisp slate + off-white neutrals
+        snow: "#F4F7FB",
+        mist: "#AEBAC9",
+        ink: "#AEBAC9",
       },
       fontFamily: {
+        // Elegant serif for display / headings
+        display: ["var(--font-cormorant)", "Georgia", "serif"],
         serif: ["var(--font-cormorant)", "Georgia", "serif"],
         sans: ["var(--font-poppins)", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        card: "0 10px 40px -12px rgba(11, 35, 75, 0.25)",
-        gold: "0 8px 30px -8px rgba(212, 161, 42, 0.45)",
+        card: "0 1px 3px rgba(0, 0, 0, 0.3), 0 20px 40px -24px rgba(0, 0, 0, 0.6)",
+        gold: "0 2px 18px -4px rgba(212, 175, 55, 0.45)",
+        lift: "0 24px 50px -20px rgba(0, 0, 0, 0.7)",
+      },
+      borderRadius: {
+        none: "0",
       },
       backgroundImage: {
         "navy-gradient":
-          "radial-gradient(1200px 600px at 15% -10%, #12305f 0%, #0B234B 45%, #081a3a 100%)",
-        "gold-gradient": "linear-gradient(135deg, #E7C768 0%, #D4A12A 100%)",
+          "radial-gradient(1200px 600px at 15% -10%, #12263f 0%, #0B192C 45%, #060F1C 100%)",
+        "gold-gradient": "linear-gradient(135deg, #E6C972 0%, #D4AF37 100%)",
       },
       keyframes: {
         "fade-up": {

@@ -18,7 +18,7 @@ const draw = {
 
 export default function Pillars() {
   return (
-    <section id="pillars" className="bg-[#f7f8fa] py-20 lg:py-28">
+    <section id="pillars" className="section-pad bg-navy">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
           <span className="eyebrow justify-center">
@@ -26,14 +26,14 @@ export default function Pillars() {
             Three Pathways, One Standard
           </span>
           <h2 className="section-title mt-4">Guidance for every curriculum</h2>
-          <p className="mt-4 text-ink">
+          <p className="mt-4 text-mist">
             Three routes for every learner — all held to the same standard of
             teaching and results.
           </p>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-5xl">
-          {/* --- Central hub --- */}
+        <div className="relative mx-auto mt-16 max-w-5xl">
+          {/* Central hub */}
           <div className="flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.85 }}
@@ -43,7 +43,7 @@ export default function Pillars() {
               className="relative"
             >
               <div className="rounded-full bg-gold-gradient p-[3px] shadow-gold">
-                <div className="flex h-28 w-28 items-center justify-center rounded-full bg-white">
+                <div className="flex h-28 w-28 items-center justify-center rounded-full bg-navy-surface">
                   <Image
                     src="/images/crest.png"
                     alt="CrownEd"
@@ -53,13 +53,13 @@ export default function Pillars() {
                   />
                 </div>
               </div>
-              <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-navy px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-light shadow">
+              <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-gold px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-navy-deep">
                 One Standard
               </span>
             </motion.div>
           </div>
 
-          {/* --- Converging connectors (desktop) --- */}
+          {/* Converging connectors */}
           <svg
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
@@ -75,7 +75,7 @@ export default function Pillars() {
                 key={d}
                 d={d}
                 fill="none"
-                stroke="#D4A12A"
+                stroke="#D4AF37"
                 strokeWidth={2}
                 strokeLinecap="round"
                 vectorEffect="non-scaling-stroke"
@@ -88,46 +88,43 @@ export default function Pillars() {
             ))}
           </svg>
 
-          {/* mobile connector */}
           <div className="mx-auto my-6 h-10 w-0.5 bg-gold-gradient lg:hidden" />
 
-          {/* --- Pathway nodes --- */}
+          {/* Pathway nodes */}
           <div className="grid gap-6 md:grid-cols-3">
             {PILLARS.map((p, i) => {
               const Icon = PILLAR_ICONS[i] ?? Landmark;
               return (
-              <motion.article
-                key={p.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.12 }}
-                className="group relative rounded-2xl border border-navy/10 bg-white p-7 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold/60"
-              >
-                {/* connection dot */}
-                <span className="absolute -top-1.5 left-1/2 hidden h-3 w-3 -translate-x-1/2 rounded-full bg-gold ring-4 ring-[#f7f8fa] lg:block" />
+                <motion.article
+                  key={p.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: 0.5 + i * 0.12 }}
+                  className="group relative card-surface p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-lift"
+                >
+                  <span className="absolute -top-1.5 left-1/2 hidden h-3 w-3 -translate-x-1/2 rounded-full bg-gold ring-4 ring-navy lg:block" />
 
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-navy transition-colors group-hover:bg-gold-gradient">
-                  <Icon
-                    className="h-7 w-7 text-gold transition-colors group-hover:text-navy"
-                    strokeWidth={1.8}
-                  />
-                </div>
-                <h3 className="mt-5 font-serif text-2xl font-semibold text-navy">
-                  {p.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink">{p.desc}</p>
-                <div className="mt-5 flex flex-wrap justify-center gap-2">
-                  {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full bg-navy/5 px-3 py-1 text-xs font-medium text-navy"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center border border-gold/30 bg-gold/10 transition-colors group-hover:bg-gold group-hover:[&>svg]:text-navy-deep">
+                    <Icon className="h-7 w-7 text-gold" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="mt-5 font-display text-xl font-bold text-snow">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-mist">
+                    {p.desc}
+                  </p>
+                  <div className="mt-5 flex flex-wrap justify-center gap-2">
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-mist"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </motion.article>
               );
             })}
           </div>
