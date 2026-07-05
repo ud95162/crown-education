@@ -1,15 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { Award, Users, TrendingUp, BookOpen, type LucideIcon } from "lucide-react";
+import { useInView } from "framer-motion";
 import { STATS } from "@/lib/content";
-
-const ICONS: LucideIcon[] = [Award, Users, TrendingUp, BookOpen];
 
 function CountUp({ to, suffix }: { to: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
   const [n, setN] = useState(0);
 
   useEffect(() => {
@@ -37,36 +34,20 @@ function CountUp({ to, suffix }: { to: number; suffix: string }) {
 
 export default function Stats() {
   return (
-    <section className="relative bg-navy-deep py-16 lg:py-20">
-      <div className="pattern-grid pointer-events-none absolute inset-0 opacity-60" />
-      <div className="container-x relative">
-        <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-          {STATS.map((s, i) => {
-            const Icon = ICONS[i] ?? Award;
-            return (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group card-surface rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-lift lg:p-8"
-              >
-                <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 transition-colors group-hover:bg-gold group-hover:[&>svg]:text-navy-deep">
-                  <Icon className="h-5 w-5 text-gold" strokeWidth={2} />
-                </span>
-                <div className="font-display text-4xl font-bold tracking-tight text-gold sm:text-5xl">
-                  <CountUp to={s.value} suffix={s.suffix} />
-                </div>
-                <div className="mt-2 font-display text-sm font-semibold uppercase tracking-wider text-snow">
-                  {s.label}
-                </div>
-                <div className="mt-1 text-xs text-mist">{s.caption}</div>
-              </motion.div>
-            );
-          })}
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {STATS.map((s) => (
+        <div
+          key={s.label}
+          className="glass rounded-xl px-4 py-4 transition-colors duration-300 hover:border-gold/50"
+        >
+          <div className="font-display text-2xl font-bold text-gold sm:text-3xl">
+            <CountUp to={s.value} suffix={s.suffix} />
+          </div>
+          <div className="mt-1 text-[11px] font-medium uppercase tracking-wider text-mist">
+            {s.label}
+          </div>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }

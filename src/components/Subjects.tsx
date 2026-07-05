@@ -1,28 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SUBJECT_FILTERS } from "@/lib/content";
 
-// Placeholder cover images — swap these for the tutor's own photos later.
-const U = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=640&q=70`;
-const IMAGES: Record<string, string> = {
-  Accounting: U("photo-1554224155-6726b3ff858f"),
-  "Business Studies": U("photo-1486406146926-c627a92ad1ab"),
-  "Business Consultancy": U("photo-1600880292203-757bb62b4baf"),
-  "Professional Development": U("photo-1552581234-26160f608093"),
-  English: U("photo-1519682337058-a94d519337bc"),
-  Mathematics: U("photo-1509228468518-180dd4864904"),
-  Science: U("photo-1532094349884-543bc11b234d"),
-  Marketing: U("photo-1460925895917-afdab827c52f"),
+const DESCRIPTIONS: Record<string, string> = {
+  Accounting: "Financial reporting and taxation mastery.",
+  "Business Studies": "Strategy, economics and market analysis.",
+  "Business Consultancy": "Advisory skills for real-world business.",
+  "Professional Development": "Career-ready skills and workplace confidence.",
+  English: "Literature and rhetoric for advanced learners.",
+  Mathematics: "From core concepts to advanced problem-solving.",
+  Science: "Theory and practicals across the disciplines.",
+  Marketing: "Branding, digital and consumer insight.",
 };
 
 export default function Subjects() {
   const [active, setActive] = useState(0);
   const filter = SUBJECT_FILTERS[active];
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollByCards = (dir: number) => {
+    const el = scrollRef.current ?? document.getElementById("subject-scroller");
+    if (!el) return;
+    el.scrollLeft += dir * 320;
+  };
 
   return (
     <section
@@ -95,8 +99,32 @@ export default function Subjects() {
           </div>
         </div>
 
+        {/* scroll controls */}
+        <div className="mt-10 flex items-center justify-end gap-2">
+          <button
+            type="button"
+            aria-label="Previous subjects"
+            onClick={() => scrollByCards(-1)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-mist transition-colors hover:border-gold hover:text-gold"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next subjects"
+            onClick={() => scrollByCards(1)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-mist transition-colors hover:border-gold hover:text-gold"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+
         {/* horizontal scrolling cards */}
-        <div className="mt-12">
+        <div
+          ref={scrollRef}
+          id="subject-scroller"
+          className="subject-scroll mt-4 flex overflow-x-auto pb-4"
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={filter.key}
@@ -104,7 +132,7 @@ export default function Subjects() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3 }}
-              className="subject-scroll flex snap-x gap-4 overflow-x-auto pb-4"
+              className="flex flex-none gap-4"
             >
               {filter.subjects.map((s, si) => {
                 return (
@@ -113,31 +141,18 @@ export default function Subjects() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.05 + si * 0.05 }}
-                    className="group card-surface flex w-52 flex-none snap-start flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-lift sm:w-56"
+                    className="group card-surface relative flex min-h-[260px] w-64 flex-none flex-col justify-end overflow-hidden rounded-xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-lift sm:w-72"
                   >
-                    {/* top image */}
-                    <div className="relative h-28 overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={IMAGES[s]}
-                        alt={s}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-surface via-navy-surface/30 to-transparent" />
-                    </div>
-                    {/* bottom content */}
-                    <div className="flex items-center justify-between gap-2 px-4 py-3">
-                      <div>
-                        <h3 className="font-display text-base font-bold leading-snug text-snow">
-                          {s}
-                        </h3>
-                        <p className="mt-0.5 text-[11px] text-mist">
-                          {filter.caption}
-                        </p>
-                      </div>
-                      <ArrowUpRight className="h-4 w-4 flex-none text-mist/40 transition-colors group-hover:text-gold" />
-                    </div>
+                    {/* ghost number */}
+                    <span className="pointer-events-none absolute right-5 top-4 font-display text-6xl font-bold text-white/[0.06] transition-colors duration-300 group-hover:text-gold/20">
+                      {String(si + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="font-display text-2xl font-bold leading-snug text-snow">
+                      {s}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-mist">
+                      {DESCRIPTIONS[s] ?? filter.caption}
+                    </p>
                   </motion.div>
                 );
               })}

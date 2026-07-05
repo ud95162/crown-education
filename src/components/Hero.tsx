@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
+import Stats from "./Stats";
 
 export default function Hero() {
   return (
@@ -15,7 +16,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute right-0 top-1/3 h-80 w-80 rounded-full bg-[#1c3f7a]/40 blur-[130px]" />
       <div className="pattern-grid pointer-events-none absolute inset-0 opacity-60" />
 
-      <div className="container-x grid items-center gap-10 pb-16 pt-6 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-16">
+      <div className="container-x grid items-center gap-10 pb-10 pt-6 lg:grid-cols-2 lg:gap-6 lg:pb-14 lg:pt-16">
         {/* Left copy */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -52,6 +53,10 @@ export default function Hero() {
             </a>
           </div>
 
+          {/* stats */}
+          <div className="mt-12">
+            <Stats />
+          </div>
         </motion.div>
 
         {/* Right portrait */}
