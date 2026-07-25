@@ -71,8 +71,8 @@ jobs:
             tar -xzf /tmp/crown-education-deploy/release.tar.gz -C "$APP_DIR"
             rm -rf /tmp/crown-education-deploy
 
-            # (Re)start under PM2 on port 3001 with production env
+            # (Re)start under PM2 on port 3002 with production env
             cd "$APP_DIR"
             pm2 delete crown-education >/dev/null 2>&1 || true
-            PORT=3001 NODE_ENV=production pm2 start server.js --name crown-education
+            PORT=3002 NODE_ENV=production pm2 start server.js --name crown-education
             pm2 save
