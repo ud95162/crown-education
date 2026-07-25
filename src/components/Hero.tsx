@@ -45,7 +45,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a href="#contact" className="btn-gold">
+            <a href="/apply" className="btn-gold">
               Apply for a Class
             </a>
             <a href="#subjects" className="btn-outline">

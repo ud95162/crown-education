@@ -24,7 +24,7 @@ export default function Navbar() {
       }`}
     >
       <nav className="container-x flex h-20 items-center justify-between">
-        <a href="#home" aria-label="CrownEd home">
+        <a href="/" aria-label="CrownEd home">
           <Logo variant="light" />
         </a>
 
@@ -32,13 +32,13 @@ export default function Navbar() {
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={l.href.startsWith("#") ? `/${l.href}` : l.href}
               className="text-sm font-medium text-mist transition-colors hover:text-gold"
             >
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="btn-gold">
+          <a href="/apply" className="btn-gold">
             Apply Now
           </a>
         </div>
@@ -84,7 +84,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/apply"
               onClick={() => setOpen(false)}
               className="btn-gold mt-3"
             >

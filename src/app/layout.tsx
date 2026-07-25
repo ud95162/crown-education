@@ -20,22 +20,27 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "CrownEd — Education That Crowns You",
   description:
-    "CrownEd offers expert tuition across O/Level, A/Level and Professional levels — covering Edexcel, Cambridge, Sri Lankan Local and all UK curricula. Accounting, Business, English, Maths, Science and more.",
+    "CrownEd offers expert tuition across Local, UK (Edexcel, Cambridge) and Professional levels — covering Information Technology, AI literacy, English Language, English Literature, Spoken English, and Business & Career Consultancy.",
   keywords: [
     "tuition Sri Lanka",
-    "O/Level tuition",
-    "A/Level tuition",
+    "IT tuition",
+    "AI literacy programs",
+    "English Language",
+    "English Literature",
     "Edexcel",
     "Cambridge",
-    "Accounting",
-    "Business Studies",
-    "professional education",
+    "Spoken English",
+    "business consultancy",
+    "professional development",
   ],
   openGraph: {
     title: "CrownEd — Education That Crowns You",
     description:
       "Expert tuition across Local, UK and Professional curricula in Sri Lanka.",
     type: "website",
+  },
+  icons: {
+    icon: "/icon.png",
   },
 };
 

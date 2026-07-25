@@ -30,101 +30,114 @@ export const PILLARS = [
 ];
 
 export const SUBJECTS = [
-  "Accounting",
-  "Business Studies",
-  "Business Consultancy",
-  "Professional Development",
-  "English",
-  "Mathematics",
-  "Science",
-  "Marketing",
+  "Information Technology",
+  "AI literacy programs",
+  "English Language",
+  "English Literature",
+  "Professional development",
+  "Spoken english",
+  "Personality building sessions",
+  "AI Courses",
+  "Business consultancy",
+  "Financial Planning Support",
+  "Business strategy consultancy for small businesses and beginners",
+  "Marketing plan development",
+  "Research and development services",
 ];
 
-// WhatsApp quick-action (update to the real number, digits only, country code first)
-export const WHATSAPP_NUMBER = "94700000000";
+// Contact details & WhatsApp quick-action
+export const CONTACT_EMAIL = "sandanithotage@gmail.com";
+export const CONTACT_PHONE = "+94 76 848 0152";
+export const WHATSAPP_NUMBER = "94768480152";
 export const WHATSAPP_MESSAGE =
   "Hi CrownEd! I'd like to apply for a class. Please share the details.";
 
-// Subjects grouped by pathway for the interactive matrix
+// Subjects grouped by pathway according to official curriculum guidance
 export const SUBJECT_FILTERS = [
   {
     key: "local",
     label: "Local",
     caption: "Sri Lankan Curriculum",
     subjects: [
-      "Mathematics",
-      "Science",
-      "English",
-      "Accounting",
-      "Business Studies",
+      "Information Technology",
+      "AI literacy programs",
+      "English Language",
+      "English Literature",
     ],
   },
   {
     key: "uk",
-    label: "UK",
-    caption: "Edexcel / Cambridge",
+    label: "UK Education",
+    caption: "Edexcel / Cambridge & UK Boards",
     subjects: [
-      "Accounting",
-      "Business Studies",
-      "Marketing",
-      "English",
-      "Mathematics",
+      "Information Technology",
+      "AI literacy programs",
+      "English Language",
+      "English Literature",
     ],
   },
   {
     key: "pro",
     label: "Professional",
-    caption: "Career Courses",
+    caption: "Career & Business Solutions",
     subjects: [
-      "Business Consultancy",
-      "Professional Development",
-      "Marketing",
-      "Accounting",
+      "Professional development",
+      "Spoken english",
+      "Personality building sessions",
+      "AI Courses",
+      "Business consultancy",
+      "Financial Planning Support",
+      "Business strategy consultancy for small businesses and beginners",
+      "Marketing plan development",
+      "Research and development services",
     ],
   },
 ] as const;
 
 export const LEVELS = [
   {
-    key: "ol",
-    name: "O/Level",
-    tagline: "Building strong foundations",
-    desc: "Core subjects taught for confidence and clarity — aligned to the Local, Edexcel and Cambridge syllabi.",
+    key: "local",
+    name: "Local Syllabus",
+    tagline: "Sri Lankan National Curriculum",
+    desc: "Comprehensive coaching in IT, AI literacy, English Language, and English Literature.",
     subjects: [
-      "Mathematics",
-      "Science",
-      "English",
-      "Accounting",
-      "Business Studies",
+      "Information Technology",
+      "AI literacy programs",
+      "English Language",
+      "English Literature",
     ],
-    curricula: ["Sri Lankan Local", "Edexcel", "Cambridge"],
+    curricula: ["Sri Lankan Local O/L & A/L"],
   },
   {
-    key: "al",
-    name: "A/Level",
-    tagline: "Mastery for university & beyond",
-    desc: "Advanced, exam-focused coaching that turns deep understanding into top grades.",
+    key: "uk",
+    name: "UK Education",
+    tagline: "Edexcel & Cambridge International",
+    desc: "Expertly tailored curriculum for IGCSE, O/Level, and A/Level UK examination boards.",
     subjects: [
-      "Accounting",
-      "Business Studies",
-      "Marketing",
-      "English",
-      "Mathematics",
+      "Information Technology",
+      "AI literacy programs",
+      "English Language",
+      "English Literature",
     ],
     curricula: ["Edexcel", "Cambridge", "All UK Boards"],
   },
   {
     key: "pro",
     name: "Professional",
-    tagline: "Career-ready skills",
-    desc: "Practical coaching for working professionals and career-focused learners.",
+    tagline: "Career & Business Solutions",
+    desc: "Executive development, spoken skills, business consultancy, and AI integration.",
     subjects: [
-      "Business Consultancy",
-      "Professional Development",
-      "Marketing",
-      "Accounting",
+      "Professional development",
+      "Spoken english",
+      "Personality building sessions",
+      "AI Courses",
+      "Business consultancy",
+      "Financial Planning Support",
+      "Business strategy consultancy for small businesses and beginners",
+      "Marketing plan development",
+      "Research and development services",
     ],
-    curricula: ["Professional Bodies", "UK Standards"],
+    curricula: ["Professional Coaching", "Business Consultancy"],
   },
 ] as const;
 

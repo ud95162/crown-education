@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import { NAV_LINKS, SUBJECTS } from "@/lib/content";
+import { NAV_LINKS, SUBJECTS, CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/content";
 
 export default function Footer() {
   return (
@@ -12,6 +12,20 @@ export default function Footer() {
             Lanka. Education that crowns every student with confidence and
             results.
           </p>
+          <div className="mt-4 space-y-1 text-sm text-white/80">
+            <p>
+              <span className="text-gold font-medium">Phone / WhatsApp:</span>{" "}
+              <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, "")}`} className="hover:text-gold transition-colors">
+                {CONTACT_PHONE}
+              </a>
+            </p>
+            <p>
+              <span className="text-gold font-medium">Email:</span>{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-gold transition-colors">
+                {CONTACT_EMAIL}
+              </a>
+            </p>
+          </div>
         </div>
 
         <div>
@@ -44,7 +58,13 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
           <p>© {new Date().getFullYear()} CrownEd. All rights reserved.</p>
-          <p>Education That Crowns You</p>
+          <div className="flex items-center gap-4">
+            <p>Education That Crowns You</p>
+            <span>•</span>
+            <a href="/admin/login" className="hover:text-gold transition-colors">
+              Admin Portal
+            </a>
+          </div>
         </div>
       </div>
     </footer>

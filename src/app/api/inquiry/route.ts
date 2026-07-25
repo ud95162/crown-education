@@ -1,42 +1,63 @@
 import { NextResponse } from "next/server";
+import { addApplication } from "@/lib/applicationsStore";
+
+export const dynamic = "force-dynamic";
 
 /**
- * Inquiry endpoint — STUB.
- *
- * For now this just validates and logs the inquiry so the form works
- * end-to-end. When you pick a data/email stack, wire it here:
- *   1. Persist to a DB (Prisma + SQLite/Postgres)
- *   2. Send an email alert to the client (Resend / Nodemailer)
- * Everything the admin panel will read comes through this route.
+ * Inquiry endpoint — Persists to application store.
  */
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, message } = body ?? {};
+    const {
+      name,
+      contactNumber,
+      phone,
+      email,
+      age,
+      schoolOrBusiness,
+      city,
+      guardianDetails,
+      curriculum,
+      subjects,
+      learningMode,
+      classType,
+      additionalNotes,
+      message,
+    } = body ?? {};
 
-    if (!name || !email || !phone) {
+    const primaryPhone = contactNumber || phone;
+
+    if (!name || !primaryPhone) {
       return NextResponse.json(
-        { ok: false, error: "Missing required fields." },
-        { status: 400 },
+        { ok: false, error: "Name and contact number are required." },
+        { status: 400 }
       );
     }
 
-    // TODO: save to database + send email notification.
-    console.log("New CrownEd inquiry:", {
+    const newApp = await addApplication({
       name,
-      email,
-      phone,
-      level: body.level,
-      subject: body.subject,
-      message,
-      receivedAt: new Date().toISOString(),
+      email: email || "",
+      contactNumber: primaryPhone,
+      age: age || "",
+      schoolOrBusiness: schoolOrBusiness || "",
+      city: city || "",
+      guardianDetails: guardianDetails || "",
+      curriculum: curriculum || "General",
+      subjects: Array.isArray(subjects) ? subjects : subjects ? [subjects] : [],
+      learningMode: learningMode || "Online",
+      classType: classType || "Individual",
+      additionalNotes: additionalNotes || message || "",
     });
 
-    return NextResponse.json({ ok: true });
-  } catch {
+    console.log("New CrownEd Application Saved:", newApp.id, newApp.name);
+
+    return NextResponse.json({ ok: true, applicationId: newApp.id });
+  } catch (error) {
+    console.error("Error saving inquiry:", error);
     return NextResponse.json(
       { ok: false, error: "Invalid request." },
-      { status: 400 },
+      { status: 400 }
     );
   }
 }

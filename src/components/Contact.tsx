@@ -14,7 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Reveal from "./Reveal";
-import { SUBJECTS } from "@/lib/content";
+import { SUBJECTS, CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/content";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -90,9 +90,19 @@ export default function Contact() {
               </p>
 
               <div className="mt-8 space-y-4">
-                <Row icon={Phone} label="Phone / WhatsApp" value="+94 70 000 0000" />
-                <Row icon={Mail} label="Email" value="hello@crowned.lk" />
-                <Row icon={MapPin} label="Location" value="Sri Lanka" />
+                <Row
+                  icon={Phone}
+                  label="Phone / WhatsApp"
+                  value={CONTACT_PHONE}
+                  href={`tel:${CONTACT_PHONE.replace(/\s+/g, "")}`}
+                />
+                <Row
+                  icon={Mail}
+                  label="Email"
+                  value={CONTACT_EMAIL}
+                  href={`mailto:${CONTACT_EMAIL}`}
+                />
+                <Row icon={MapPin} label="Location" value="Colombo, Sri Lanka" />
               </div>
 
               <div className="mt-8 inline-flex items-center gap-2 text-xs text-mist/70">
@@ -173,10 +183,10 @@ export default function Contact() {
                           <>
                             <Field label="Level">
                               <select className="input" value={form.level} onChange={set("level")}>
-                                <option value="" disabled>Select level</option>
-                                <option>O/Level</option>
-                                <option>A/Level</option>
-                                <option>Professional</option>
+                                <option value="" disabled>Select curriculum / pathway</option>
+                                <option>Local (Sri Lankan Syllabus)</option>
+                                <option>UK Education (Edexcel / Cambridge)</option>
+                                <option>Professional & Business Consultancy</option>
                               </select>
                             </Field>
                             <Field label="Subject">
@@ -285,20 +295,30 @@ function Row({
   icon: Icon,
   label,
   value,
+  href,
 }: {
   icon: LucideIcon;
   label: string;
   value: string;
+  href?: string;
 }) {
-  return (
-    <div className="flex items-center gap-4">
-      <span className="flex h-11 w-11 items-center justify-center border border-gold/30 bg-white/[0.04]">
+  const inner = (
+    <div className="group flex items-center gap-4">
+      <span className="flex h-11 w-11 items-center justify-center border border-gold/30 bg-white/[0.04] transition-colors group-hover:border-gold group-hover:bg-gold/10">
         <Icon className="h-5 w-5 text-gold" strokeWidth={2} />
       </span>
       <div>
         <div className="text-xs uppercase tracking-wider text-mist/60">{label}</div>
-        <div className="font-medium text-snow">{value}</div>
+        <div className="font-medium text-snow transition-colors group-hover:text-gold">{value}</div>
       </div>
     </div>
+  );
+
+  return href ? (
+    <a href={href} className="block transition-opacity hover:opacity-90">
+      {inner}
+    </a>
+  ) : (
+    inner
   );
 }

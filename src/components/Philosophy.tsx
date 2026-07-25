@@ -30,12 +30,11 @@ export default function Philosophy() {
           </span>
           <Quote className="mt-6 h-11 w-11 fill-gold text-gold" />
           <blockquote className="mt-4 font-display text-3xl font-medium italic leading-tight text-snow sm:text-4xl">
-            &ldquo;True education is not the filling of a vessel, but the
-            kindling of a flame that burns for a lifetime.&rdquo;
+            &ldquo;There's nothing that people cannot do if they really want to do it.&rdquo;
           </blockquote>
           <figcaption className="mt-8">
             <div className="font-display text-2xl font-semibold text-gold">
-              Ms Sadani Kumari
+            Sandani Kumari
             </div>
             <div className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-mist">
               Founder &amp; Lead Tutor
@@ -44,7 +43,7 @@ export default function Philosophy() {
 
           <p className="mt-6 max-w-xl leading-relaxed text-mist">
             With years of experience in private education across local and UK
-            curricula, Ms Sadani Kumari founded CrownEd to offer mentorship that
+            curricula, Ms Sandani Kumari founded CrownEd to offer mentorship that
             goes beyond textbooks — combining rigorous academic discipline with
             the empathy required to guide every student through their most
             formative years.
