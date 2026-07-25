@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="admin"
+                  placeholder="Enter username"
                   className="w-full rounded-lg border border-white/20 bg-navy-deep/80 pl-10 pr-4 py-3 text-sm text-snow placeholder-mist/40 focus:border-gold focus:outline-none"
                   required
                 />
@@ -116,7 +116,7 @@ export default function AdminLoginPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder="Enter password"
                   className="w-full rounded-lg border border-white/20 bg-navy-deep/80 pl-10 pr-4 py-3 text-sm text-snow placeholder-mist/40 focus:border-gold focus:outline-none"
                   required
                 />
@@ -132,16 +132,6 @@ export default function AdminLoginPage() {
               <ArrowRight className="h-4 w-4" />
             </button>
           </form>
-
-          {/* Quick Credential Hint Box */}
-          <div className="mt-6 pt-5 border-t border-white/10 text-center text-xs text-mist">
-            <p className="font-semibold text-snow/90 mb-1">Demo Admin Credentials:</p>
-            <div className="flex justify-center gap-4 font-mono text-gold bg-navy-deep/60 py-2 rounded border border-white/5">
-              <span>User: <strong className="text-snow">admin</strong></span>
-              <span>•</span>
-              <span>Pass: <strong className="text-snow">crown2026!</strong></span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
