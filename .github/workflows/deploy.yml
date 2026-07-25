@@ -40,7 +40,9 @@ jobs:
           cp -r public release/public
           tar -czf release.tar.gz -C release .
 
-      - name: Upload to VPS
+      # Upload using SSH Key (if VPS_SSH_KEY is set)
+      - name: Upload to VPS (SSH Key)
+        if: ${{ secrets.VPS_SSH_KEY != '' }}
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -50,12 +52,53 @@ jobs:
           source: release.tar.gz
           target: /tmp/crown-education-deploy
 
-      - name: Release & restart on VPS
+      # Upload using SSH Password (if VPS_PASSWORD is set)
+      - name: Upload to VPS (Password)
+        if: ${{ secrets.VPS_PASSWORD != '' && secrets.VPS_SSH_KEY == '' }}
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          source: release.tar.gz
+          target: /tmp/crown-education-deploy
+
+      # Restart using SSH Key (if VPS_SSH_KEY is set)
+      - name: Release & restart on VPS (SSH Key)
+        if: ${{ secrets.VPS_SSH_KEY != '' }}
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            set -e
+            APP_DIR=/var/www/crown-education
+            mkdir -p "$APP_DIR"
+
+            # Wipe old build but KEEP the production env file
+            find "$APP_DIR" -mindepth 1 -maxdepth 1 ! -name '.env.production' ! -name '.env' ! -name '.env.local' -exec rm -rf {} +
+
+            # Extract the new standalone build
+            tar -xzf /tmp/crown-education-deploy/release.tar.gz -C "$APP_DIR"
+            rm -rf /tmp/crown-education-deploy
+
+            # (Re)start under PM2 on port 3001 with production env
+            cd "$APP_DIR"
+            pm2 delete crown-education >/dev/null 2>&1 || true
+            PORT=3001 NODE_ENV=production pm2 start server.js --name crown-education
+            pm2 save
+
+      # Restart using SSH Password (if VPS_PASSWORD is set)
+      - name: Release & restart on VPS (Password)
+        if: ${{ secrets.VPS_PASSWORD != '' && secrets.VPS_SSH_KEY == '' }}
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
             set -e
