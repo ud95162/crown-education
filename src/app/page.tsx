@@ -5,6 +5,7 @@ import About from "@/components/About";
 import Subjects from "@/components/Subjects";
 import Why from "@/components/Why";
 import Philosophy from "@/components/Philosophy";
+import BookConsultation from "@/components/BookConsultation";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <Subjects />
         <Why />
         <Philosophy />
+        <BookConsultation />
         <Contact />
       </main>
       <Footer />

@@ -24,6 +24,12 @@ import {
   ChevronRight,
   Play,
   Pause,
+  Calculator,
+  FlaskConical,
+  Atom,
+  Dna,
+  Zap,
+  ShoppingBag,
 } from "lucide-react";
 import { SUBJECT_FILTERS } from "@/lib/content";
 
@@ -32,6 +38,15 @@ const SUBJECT_ICONS: Record<string, React.ElementType> = {
   "AI literacy programs": Sparkles,
   "English Language": BookOpen,
   "English Literature": Feather,
+  "Business studies": Briefcase,
+  "Accounting": Calculator,
+  "Marketing": Megaphone,
+  "Maths": Calculator,
+  "Science": FlaskConical,
+  "Commerce": ShoppingBag,
+  "Biology": Dna,
+  "Physics": Zap,
+  "Chemistry": Atom,
   "Professional development": UserCheck,
   "Spoken english": MessageSquare,
   "Personality building sessions": Smile,
@@ -52,6 +67,24 @@ const DESCRIPTIONS: Record<string, string> = {
     "Grammar, essay writing, comprehension, vocabulary, and effective communication.",
   "English Literature":
     "Critical analysis of prose, poetry, drama, and analytical literary appreciation.",
+  "Business studies":
+    "Operations, management principles, economics, and strategic business decision-making.",
+  "Accounting":
+    "Financial reporting, bookkeeping, managerial accounting, ledger management, and auditing.",
+  "Marketing":
+    "Market analysis, target demographics, digital marketing channels, and campaign strategy.",
+  "Maths":
+    "Algebra, calculus, geometry, statistics, and problem-solving techniques for exam success.",
+  "Science":
+    "Core physical and natural science fundamentals, scientific enquiry, and practical experiments.",
+  "Commerce":
+    "Commercial practices, trade mechanics, supply chain fundamentals, and business economics.",
+  "Biology":
+    "Cellular biology, genetics, human anatomy, ecosystems, and biological systems.",
+  "Physics":
+    "Mechanics, energy, wave motion, electromagnetism, and fundamental physical laws.",
+  "Chemistry":
+    "Organic & inorganic chemistry, chemical reactions, bonding, and laboratory methods.",
   "Professional development":
     "Career advancement, executive skills, workplace communication, and leadership.",
   "Spoken english":

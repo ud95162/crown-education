@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { addApplication } from "@/lib/applicationsStore";
+import { sendEmailNotification } from "@/lib/mailer";
 
 export const dynamic = "force-dynamic";
 
 /**
- * Inquiry endpoint — Persists to application store.
+ * Inquiry endpoint — Persists to application store & triggers Gmail notification.
  */
 export async function POST(request: Request) {
   try {
@@ -51,6 +52,18 @@ export async function POST(request: Request) {
     });
 
     console.log("New CrownEd Application Saved:", newApp.id, newApp.name);
+
+    // Send Gmail SMTP notification (non-blocking log)
+    sendEmailNotification({
+      type: "application",
+      name,
+      contactNumber: primaryPhone,
+      email,
+      curriculum,
+      subjects: Array.isArray(subjects) ? subjects : subjects ? [subjects] : [],
+      learningMode,
+      additionalNotes: additionalNotes || message,
+    }).catch((err) => console.error("Async email error:", err));
 
     return NextResponse.json({ ok: true, applicationId: newApp.id });
   } catch (error) {
