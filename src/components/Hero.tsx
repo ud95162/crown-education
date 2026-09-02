@@ -1,11 +1,69 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import Stats from "./Stats";
 
+type Slide = {
+  eyebrow: string;
+  title: React.ReactNode;
+  description: string;
+  cta: { label: string; href: string };
+  image: string;
+  imageAlt: string;
+};
+
+const SLIDES: Slide[] = [
+  {
+    eyebrow: "Local · UK · Professional Tuition",
+    title: (
+      <>
+        Education
+        <br />
+        That{" "}
+        <span className="bg-gold-gradient bg-clip-text text-transparent">
+          Crowns You
+        </span>
+      </>
+    ),
+    description:
+      "Expert tuition across O/Levels, A/Levels and Professional levels — covering Edexcel, Cambridge, the Sri Lankan Local curriculum and all UK examination boards.",
+    cta: { label: "Apply for a Class", href: "/apply" },
+    image: "/images/teacher-hero-cutout.png",
+    imageAlt: "CrownEd lead educator",
+  },
+  {
+    eyebrow: "Strategic Business Advisory",
+    title: (
+      <>
+        Where{" "}
+        <span className="bg-gold-gradient bg-clip-text text-transparent">
+          Strategy
+        </span>
+        <br />
+        Crowns You
+      </>
+    ),
+    description:
+      "Strategic business consulting, professional development, and tailored solutions to help organizations enhance performance, achieve sustainable growth, and turn their vision into measurable results.",
+    cta: { label: "Business Consultation", href: "#consultation" },
+    image: "/images/business_consult.png",
+    imageAlt: "CrownEd business consultant",
+  },
+];
+
 export default function Hero() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((prev) => (prev + 1) % SLIDES.length);
+    }, 6000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section
       id="home"
@@ -24,33 +82,58 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 pb-10 lg:pb-16"
         >
-          <span className="eyebrow">
-            <span className="h-px w-8 bg-gold" />
-            Local · UK · Professional Tuition
-          </span>
+          {/* All slides share one grid cell, so the block is always as tall
+              as the tallest slide — the portrait on the right never shifts. */}
+          <div className="grid">
+            {SLIDES.map((s, i) => {
+              const isActive = i === active;
+              return (
+                <div
+                  key={i}
+                  style={{ gridArea: "1 / 1" }}
+                  aria-hidden={!isActive}
+                  className={`transition-all ease-out ${
+                    isActive
+                      ? "translate-y-0 opacity-100 delay-200 duration-500"
+                      : "pointer-events-none translate-y-4 opacity-0 duration-200"
+                  }`}
+                >
+                  <span className="eyebrow">
+                    <span className="h-px w-8 bg-gold" />
+                    {s.eyebrow}
+                  </span>
 
-          <h1 className="mt-6 font-display text-5xl font-bold leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">
-            Education
-            <br />
-            That{" "}
-            <span className="bg-gold-gradient bg-clip-text text-transparent">
-              Crowns You
-            </span>
-          </h1>
+                  <h1 className="mt-6 font-display text-5xl font-bold leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">
+                    {s.title}
+                  </h1>
 
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-mist sm:text-lg">
-            Expert tuition across O/Levels, A/Levels and Professional levels —
-            covering Edexcel, Cambridge, the Sri Lankan Local curriculum and all
-            UK examination boards.
-          </p>
+                  <p className="mt-6 max-w-lg text-base leading-relaxed text-mist sm:text-lg">
+                    {s.description}
+                  </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a href="/apply" className="btn-gold">
-              Apply for a Class
-            </a>
-            <a href="#contact" className="btn-outline">
-              Book a Consultation
-            </a>
+                  <div className="mt-9 flex flex-wrap items-center gap-4">
+                    <a href={s.cta.href} className="btn-gold">
+                      {s.cta.label}
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* slide indicators */}
+          <div className="mt-8 flex items-center gap-2.5">
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Show slide ${i + 1}`}
+                onClick={() => setActive(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === active ? "w-8 bg-gold" : "w-3 bg-white/25 hover:bg-white/40"
+                }`}
+              />
+            ))}
           </div>
 
           {/* stats */}
@@ -73,15 +156,30 @@ export default function Hero() {
           {/* glow behind subject */}
           <div className="pointer-events-none absolute bottom-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-gold/25 blur-[100px] lg:left-auto lg:right-16 lg:translate-x-0" />
 
-          <div className="relative z-10 flex items-end leading-none">
-            <Image
-              src="/images/teacher-hero-cutout.png"
-              alt="CrownEd lead educator"
-              width={560}
-              height={1016}
-              priority
-              className="relative z-10 block max-h-[480px] w-auto align-bottom object-contain object-bottom drop-shadow-[0_25px_45px_rgba(0,0,0,0.5)] lg:max-h-[620px]"
-            />
+          {/* Portrait crossfades with the active slide; fixed height keeps
+              the layout steady. */}
+          <div className="relative z-10 h-[480px] w-full leading-none lg:h-[620px]">
+            {SLIDES.map((s, i) => {
+              const isActive = i === active;
+              return (
+                <div
+                  key={i}
+                  aria-hidden={!isActive}
+                  className={`absolute bottom-0 left-1/2 flex -translate-x-1/2 items-end transition-opacity ease-out lg:left-auto lg:right-0 lg:translate-x-0 ${
+                    isActive ? "opacity-100 delay-200 duration-500" : "opacity-0 duration-200"
+                  }`}
+                >
+                  <Image
+                    src={s.image}
+                    alt={s.imageAlt}
+                    width={560}
+                    height={1016}
+                    priority={i === 0}
+                    className="block max-h-[480px] w-auto align-bottom object-contain object-bottom drop-shadow-[0_25px_45px_rgba(0,0,0,0.5)] lg:max-h-[620px]"
+                  />
+                </div>
+              );
+            })}
           </div>
 
           {/* floating credential badge */}
