@@ -38,12 +38,11 @@ const SLIDES: Slide[] = [
     eyebrow: "Strategic Business Advisory",
     title: (
       <>
-        Where{" "}
         <span className="bg-gold-gradient bg-clip-text text-transparent">
           Strategy
         </span>
         <br />
-        Crowns You
+        That Crowns You
       </>
     ),
     description:
@@ -73,6 +72,8 @@ export default function Hero() {
       <div className="pointer-events-none absolute -left-40 top-10 h-[28rem] w-[28rem] rounded-full bg-gold/15 blur-[130px]" />
       <div className="pointer-events-none absolute right-0 top-1/3 h-80 w-80 rounded-full bg-[#1c3f7a]/40 blur-[130px]" />
       <div className="pattern-grid pointer-events-none absolute inset-0 opacity-60" />
+      {/* Wide animated dot field spanning the hero */}
+      <div className="pattern-dots pointer-events-none absolute inset-0" />
 
       <div className="container-x grid items-end gap-10 pt-6 lg:grid-cols-2 lg:gap-6 lg:pt-16">
         {/* Left copy */}
@@ -150,9 +151,8 @@ export default function Hero() {
           className="relative flex min-h-[440px] items-end justify-center self-end lg:min-h-[620px] lg:justify-end"
         >
           {/* geometric backdrops */}
-          <div className="pointer-events-none absolute bottom-8 right-6 h-[380px] w-[380px] rotate-45 border border-gold/25 sm:right-12 lg:h-[460px] lg:w-[460px]" />
-          <div className="pointer-events-none absolute bottom-24 right-20 h-[220px] w-[220px] rotate-12 border border-gold/15 lg:h-[280px] lg:w-[280px]" />
-          <div className="pattern-dots pointer-events-none absolute inset-0 opacity-70" />
+          <div className="hero-square-a pointer-events-none absolute bottom-8 right-6 h-[380px] w-[380px] border border-gold/25 sm:right-12 lg:h-[460px] lg:w-[460px]" />
+          <div className="hero-square-b pointer-events-none absolute bottom-24 right-20 h-[220px] w-[220px] border border-gold/15 lg:h-[280px] lg:w-[280px]" />
           {/* glow behind subject */}
           <div className="pointer-events-none absolute bottom-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-gold/25 blur-[100px] lg:left-auto lg:right-16 lg:translate-x-0" />
 
