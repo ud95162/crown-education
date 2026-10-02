@@ -9,36 +9,23 @@ import Image from "next/image";
 
 export default function Logo({
   className = "",
-  variant = "light",
+  imgClassName = "h-14 sm:h-16 w-auto",
 }: {
   className?: string;
   variant?: "light" | "dark";
+  imgClassName?: string;
 }) {
-  const wordColor = variant === "light" ? "#FFFFFF" : "#0B234B";
-  const subColor = variant === "light" ? "rgba(255,255,255,0.7)" : "#5b6472";
-
   return (
-    <span className={`inline-flex items-center gap-3 ${className}`}>
+    <span className={`inline-flex items-center justify-center ${className}`}>
       <Image
-        src="/images/crest.png"
-        alt="CrownEd crest"
-        width={44}
-        height={50}
+        src="/images/logo_new.png"
+        alt="CrownEd"
+        width={300}
+        height={300}
         priority
-        className="h-11 w-auto"
+        className={`object-contain transition-transform duration-300 hover:scale-105 ${imgClassName}`}
       />
-      <span className="leading-none">
-        <span className="block font-serif text-2xl font-semibold tracking-wide">
-          <span style={{ color: wordColor }}>Crown</span>
-          <span style={{ color: "#D4A12A" }}>Ed</span>
-        </span>
-        <span
-          className="block text-[9px] font-semibold uppercase tracking-[0.28em]"
-          style={{ color: subColor }}
-        >
-          Education That Crowns You
-        </span>
-      </span>
     </span>
   );
 }
+

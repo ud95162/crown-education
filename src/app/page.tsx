@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Pillars from "@/components/Pillars";
 import About from "@/components/About";
 import Subjects from "@/components/Subjects";
+import Consultancy from "@/components/Consultancy";
 import Why from "@/components/Why";
 import Philosophy from "@/components/Philosophy";
 import BookConsultation from "@/components/BookConsultation";
@@ -16,11 +17,12 @@ export default function Home() {
       <main>
         <Hero />
         <Pillars />
+        <Consultancy />
+        {/* <BookConsultation /> */}
         <About />
         <Subjects />
         <Why />
         <Philosophy />
-        <BookConsultation />
         <Contact />
       </main>
       <Footer />

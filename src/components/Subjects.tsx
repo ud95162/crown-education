@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Laptop,
@@ -18,12 +18,8 @@ import {
   Megaphone,
   Search,
   CheckCircle2,
-  Table as TableIcon,
-  LayoutGrid,
   ChevronLeft,
   ChevronRight,
-  Play,
-  Pause,
   Calculator,
   FlaskConical,
   Atom,
@@ -107,8 +103,6 @@ const DESCRIPTIONS: Record<string, string> = {
 
 export default function Subjects() {
   const [active, setActive] = useState(0);
-  const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -132,22 +126,19 @@ export default function Subjects() {
 
   // Auto scroll effect
   useEffect(() => {
-    if (!isAutoPlay || isHovered || viewMode !== "grid") return;
-
+    if (isHovered) return;
     const timer = setInterval(() => {
       if (!scrollRef.current) return;
       const container = scrollRef.current;
       const maxScroll = container.scrollWidth - container.clientWidth;
-
       if (container.scrollLeft >= maxScroll - 10) {
         container.scrollTo({ left: 0, behavior: "smooth" });
       } else {
         container.scrollBy({ left: 320, behavior: "smooth" });
       }
     }, 3500);
-
     return () => clearInterval(timer);
-  }, [isAutoPlay, isHovered, viewMode, active]);
+  }, [isHovered, active]);
 
   return (
     <section
@@ -159,7 +150,7 @@ export default function Subjects() {
       <div className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-gold/12 blur-[130px]" />
       <div className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#1c3f7a]/40 blur-[130px]" />
       <Image
-        src="/images/crest.png"
+        src="/images/logo_new.png"
         alt=""
         aria-hidden="true"
         width={520}
@@ -179,9 +170,8 @@ export default function Subjects() {
           </p>
         </div>
 
-        {/* Top Controls: Tabs & View Toggle */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 sm:flex-row">
-          {/* pill-tab filter */}
+        {/* Curriculum Tabs */}
+        <div className="mt-10 flex justify-center">
           <div
             role="tablist"
             aria-label="Curriculum pathways"
@@ -210,70 +200,19 @@ export default function Subjects() {
                     />
                   )}
                   {f.label}
-                  <span
-                    className={`ml-2 hidden text-xs font-normal sm:inline ${
-                      selected ? "text-navy-deep/70" : "text-mist/60"
-                    }`}
-                  >
+                  <span className={`ml-2 hidden text-xs font-normal sm:inline ${
+                    selected ? "text-navy-deep/70" : "text-mist/60"
+                  }`}>
                     ({f.subjects.length})
                   </span>
                 </button>
               );
             })}
           </div>
-
-          {/* Controls: Auto-Scroll & Grid/Table Toggle */}
-          <div className="flex items-center gap-3">
-            {viewMode === "grid" && (
-              <button
-                onClick={() => setIsAutoPlay(!isAutoPlay)}
-                className={`glass flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
-                  isAutoPlay ? "text-gold border border-gold/30" : "text-mist hover:text-snow"
-                }`}
-                title={isAutoPlay ? "Pause Auto-Scroll" : "Play Auto-Scroll"}
-              >
-                {isAutoPlay ? (
-                  <>
-                    <Pause className="h-3.5 w-3.5" /> Auto Scrolling
-                  </>
-                ) : (
-                  <>
-                    <Play className="h-3.5 w-3.5" /> Auto Scroll Off
-                  </>
-                )}
-              </button>
-            )}
-
-            <div className="glass inline-flex items-center rounded-lg p-1 text-xs">
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium transition-colors ${
-                  viewMode === "grid"
-                    ? "bg-gold text-navy-deep font-bold"
-                    : "text-mist hover:text-snow"
-                }`}
-              >
-                <LayoutGrid className="h-3.5 w-3.5" />
-                Row View
-              </button>
-              <button
-                onClick={() => setViewMode("table")}
-                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium transition-colors ${
-                  viewMode === "table"
-                    ? "bg-gold text-navy-deep font-bold"
-                    : "text-mist hover:text-snow"
-                }`}
-              >
-                <TableIcon className="h-3.5 w-3.5" />
-                Guidance Table
-              </button>
-            </div>
-          </div>
         </div>
 
-        {/* Content View */}
-        {viewMode === "grid" ? (
-          <div className="mt-8">
+        {/* Content */}
+        <div className="mt-8">
             {/* Row Navigation Bar */}
             <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
               <div>
@@ -372,77 +311,17 @@ export default function Subjects() {
               </AnimatePresence>
             </div>
           </div>
-        ) : (
-          /* Table View matching the guidance overview matrix */
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-8 overflow-x-auto rounded-xl border border-white/15 bg-navy-surface p-4 sm:p-6"
-          >
-            <div className="mb-4 text-center">
-              <h3 className="font-display text-lg font-bold text-gold uppercase tracking-wider">
-                Guidance for every curriculum
-              </h3>
-            </div>
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-gold/30 bg-white/[0.04]">
-                  {SUBJECT_FILTERS.map((f) => (
-                    <th
-                      key={f.key}
-                      className="px-4 py-3 font-display text-base font-bold text-snow border-r border-white/10 last:border-r-0"
-                    >
-                      {f.label}
-                      <span className="block text-xs font-normal text-mist font-sans">
-                        {f.caption}
-                      </span>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10">
-                {Array.from({
-                  length: Math.max(...SUBJECT_FILTERS.map((f) => f.subjects.length)),
-                }).map((_, rowIndex) => (
-                  <tr key={rowIndex} className="hover:bg-white/[0.02]">
-                    {SUBJECT_FILTERS.map((f) => {
-                      const subject = f.subjects[rowIndex];
-                      return (
-                        <td
-                          key={f.key}
-                          className="px-4 py-3 text-mist border-r border-white/10 last:border-r-0 align-top"
-                        >
-                          {subject ? (
-                            <div className="flex items-start gap-2">
-                              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
-                              <span className="text-snow font-medium">
-                                {subject}
-                              </span>
-                            </div>
-                          ) : (
-                            <span className="text-mist/20">—</span>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </motion.div>
-        )}
 
-        {/* footer summary badge */}
+        {/* Footer summary badges */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-3 border-t border-white/10 pt-8 text-sm">
           <span className="text-xs uppercase tracking-wider text-mist/60">
             Curriculum Pathways
           </span>
-          {SUBJECT_FILTERS.map((f) => (
+          {SUBJECT_FILTERS.map((f, i) => (
             <button
               key={f.key}
               onClick={() => {
-                setActive(SUBJECT_FILTERS.findIndex((x) => x.key === f.key));
-                setViewMode("grid");
+                setActive(i);
                 if (scrollRef.current) scrollRef.current.scrollLeft = 0;
               }}
               className="border border-gold/40 px-4 py-1.5 text-gold-light hover:bg-gold hover:text-navy-deep transition-colors text-xs font-semibold"

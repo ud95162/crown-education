@@ -14,6 +14,8 @@ import {
   CheckCircle2,
   Send,
   ShieldCheck,
+  GraduationCap,
+  TrendingUp,
 } from "lucide-react";
 import Reveal from "./Reveal";
 import { SUBJECTS, WHATSAPP_NUMBER } from "@/lib/content";
@@ -95,20 +97,83 @@ export default function BookConsultation() {
 
       <div className="container-x relative z-10">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="eyebrow justify-center">
-            <span className="h-px w-8 bg-gold" />
-            1-on-1 Academic Advisory
-          </span>
-          <h2 className="section-title mt-4">Book a Free Consultation</h2>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold shadow-gold">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>CrownEd Signature Service</span>
+          </div>
+
+          <h2 className="section-title mt-2">
+            Personalized 1-on-1 Consultation
+          </h2>
           <p className="mt-4 text-base text-mist sm:text-lg">
-            Schedule a personalized session with our lead educator to discuss curriculum selection, exam strategy, and tailored tutoring plans.
+            Schedule a dedicated advisory session with our lead educator & strategist. Whether navigating international curricula, mastering exam technique, or seeking strategic career guidance — our consultations provide the clarity you need.
           </p>
         </div>
 
+        {/* 3 Consultation Advisory Tracks */}
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="glass border border-white/10 p-6 transition-all duration-300 hover:border-gold/40 hover:-translate-y-1">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold/15 text-gold border border-gold/30">
+              <GraduationCap className="h-6 w-6" />
+            </div>
+            <h3 className="mt-4 font-display text-xl font-bold text-snow">
+              Curriculum & Exam Strategy
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-mist">
+              Tailored guidance across Edexcel, Cambridge, and Sri Lankan Local syllabuses. Select optimal subjects and map your academic success.
+            </p>
+          </div>
 
+          <div className="glass border border-gold/30 bg-gold/[0.03] p-6 transition-all duration-300 hover:border-gold hover:-translate-y-1 shadow-gold">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold text-navy-deep font-bold">
+              <Sparkles className="h-6 w-6" />
+            </div>
+            <div className="mt-1 inline-block text-[10px] font-bold uppercase tracking-wider text-gold">Most Requested</div>
+            <h3 className="mt-1 font-display text-xl font-bold text-snow">
+              1-on-1 Academic Audit
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-mist">
+              Comprehensive analysis of past exam performance, learning gaps, and focused revision plans to turn weak areas into top grades.
+            </p>
+          </div>
 
-        <div className="mt-12 mx-auto max-w-2xl">
+          <div className="glass border border-white/10 p-6 transition-all duration-300 hover:border-gold/40 hover:-translate-y-1">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold/15 text-gold border border-gold/30">
+              <TrendingUp className="h-6 w-6" />
+            </div>
+            <h3 className="mt-4 font-display text-xl font-bold text-snow">
+              Business & Career Advisory
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-mist">
+              Strategic consultation for business studies, marketing plans, organizational research & development, and professional skill elevation.
+            </p>
+          </div>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-mist font-medium">
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-gold" /> 100% Free &amp; Confidential
+          </span>
+          <span className="flex items-center gap-2">
+            <Clock className="h-4 w-4 text-gold" /> 30-Minute Focused Session
+          </span>
+          <span className="flex items-center gap-2">
+            <ShieldCheck className="h-4 w-4 text-gold" /> Direct with Lead Consultant
+          </span>
+        </div>
+
+        <div className="mt-10 mx-auto max-w-2xl">
           <div className="glass border border-white/10 p-6 sm:p-10 shadow-2xl relative">
+            <div className="mb-6 text-center">
+              <span className="eyebrow justify-center">
+                <span className="h-px w-8 bg-gold" />
+                Reserve Your Session
+              </span>
+              <h3 className="font-display text-2xl font-bold text-snow mt-2">
+                Book Your Consultation Now
+              </h3>
+            </div>
             <AnimatePresence mode="wait">
               {status === "success" ? (
                 <motion.div

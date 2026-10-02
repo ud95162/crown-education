@@ -4,9 +4,10 @@ export const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Subjects", href: "#subjects" },
+  { label: "Consultancy", href: "#consultancy" },
   { label: "Consultation", href: "#consultation" },
-  { label: "Why CrownEd", href: "#why" },
   { label: "Contact", href: "#contact" },
+  { label: "Why CrownEd", href: "#why" },
 ];
 
 export const PILLARS = [

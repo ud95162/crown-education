@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Landmark, Globe2, Briefcase, type LucideIcon } from "lucide-react";
+import { Landmark, Globe2, Briefcase, ArrowRight, type LucideIcon } from "lucide-react";
 import { PILLARS } from "@/lib/content";
 
 const PILLAR_ICONS: LucideIcon[] = [Landmark, Globe2, Briefcase];
@@ -45,7 +45,7 @@ export default function Pillars() {
               <div className="rounded-full bg-gold-gradient p-[3px] shadow-gold">
                 <div className="flex h-28 w-28 items-center justify-center rounded-full bg-navy-surface">
                   <Image
-                    src="/images/crest.png"
+                    src="/images/logo_new.png"
                     alt="CrownEd"
                     width={72}
                     height={82}
@@ -123,6 +123,16 @@ export default function Pillars() {
                         {t}
                       </span>
                     ))}
+                  </div>
+
+                  <div className="mt-6 border-t border-white/10 pt-4">
+                    <a
+                      href="#consultation"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold transition-colors hover:text-gold-light group-hover:underline"
+                    >
+                      <span>Book Consultation for this Track</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </a>
                   </div>
                 </motion.article>
               );

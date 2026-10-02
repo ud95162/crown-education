@@ -37,15 +37,14 @@ export default function Philosophy() {
               Sandani Kumari
             </div>
             <div className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-mist">
-              Founder, Lead Tutor &amp; Consultant
+              Founder, Consultant &amp; Lead Tutor
             </div>
           </figcaption>
 
           <p className="mt-6 max-w-xl leading-relaxed text-mist">
-            With years of experience in private education across local and UK curricula, Ms Sandani Kumari founded CrownEd to offer mentorship that goes beyond textbooks — combining rigorous academic discipline with the empathy required to guide every student through their most formative years.
-          </p>
+            With extensive experience in the education industry across local and UK curricula, as an academic and researcher, Ms. Sandani Kumari founded CrownEd to provide meaningful, evidence-based support that goes beyond traditional education.          </p>
           <p className="mt-6 max-w-xl leading-relaxed text-mist">
-            Beyond education, CrownEd also serves as a hub for business consultation, research and development, and marketing plan creation. By integrating strategic insights with innovative solutions, the institution empowers individuals and organizations to grow sustainably, adapt to changing markets, and position themselves for long-term success.
+            CrownEd brings together education, business consultancy, research and development, marketing strategy, and professional and career development to empower individuals and organisations to grow, adapt, and achieve long-term success.
           </p>
         </Reveal>
       </div>

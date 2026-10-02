@@ -68,7 +68,7 @@ export default function Contact() {
           <div className="pattern-grid pointer-events-none absolute inset-0" />
           <div className="pointer-events-none absolute -left-24 -top-20 h-80 w-80 rounded-full bg-gold/15 blur-[120px]" />
           <Image
-            src="/images/crest.png"
+            src="/images/logo_new.png"
             alt=""
             aria-hidden="true"
             width={520}
@@ -124,20 +124,18 @@ export default function Contact() {
                         {STEPS.map((label, i) => (
                           <div key={label} className="flex items-center gap-2">
                             <span
-                              className={`flex h-7 w-7 items-center justify-center text-xs font-bold transition-colors ${
-                                i < step
+                              className={`flex h-7 w-7 items-center justify-center text-xs font-bold transition-colors ${i < step
                                   ? "bg-gold text-navy-deep"
                                   : i === step
                                     ? "border border-gold text-gold"
                                     : "border border-white/15 text-mist/50"
-                              }`}
+                                }`}
                             >
                               {i < step ? <Check className="h-3.5 w-3.5" /> : i + 1}
                             </span>
                             <span
-                              className={`hidden text-xs font-medium sm:block ${
-                                i <= step ? "text-snow" : "text-mist/50"
-                              }`}
+                              className={`hidden text-xs font-medium sm:block ${i <= step ? "text-snow" : "text-mist/50"
+                                }`}
                             >
                               {label}
                             </span>
