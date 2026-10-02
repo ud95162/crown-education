@@ -59,11 +59,11 @@ export default function Footer() {
         <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
           <p>© {new Date().getFullYear()} CrownEd. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <p>Education That Crowns You</p>
-            <span>•</span>
-            <a href="/admin/login" className="hover:text-gold transition-colors">
-              Admin Portal
-            </a>
+            <p>
+              Design & Developed by
+              <a href="https://codexium.dev" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
+                Codexium Pvt Ltd
+              </a></p>
           </div>
         </div>
       </div>

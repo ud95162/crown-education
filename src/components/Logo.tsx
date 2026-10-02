@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function Logo({
   className = "",
-  imgClassName = "h-14 sm:h-16 w-auto",
+  imgClassName = "h-14 sm:h-24 w-auto",
 }: {
   className?: string;
   variant?: "light" | "dark";

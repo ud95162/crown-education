@@ -80,13 +80,12 @@ export default function Contact() {
             {/* Left info */}
             <Reveal>
               <span className="eyebrow">
-                <span className="h-px w-8 bg-gold" />
-                Admissions
+                {/* <span className="h-px w-8 bg-gold" /> */}
+                contact us
               </span>
-              <h2 className="section-title mt-4">Apply for a class</h2>
+              <h2 className="section-title mt-4">Get In Touch</h2>
               <p className="mt-5 max-w-md leading-relaxed text-mist">
-                Tell us about the student in three quick steps and we&apos;ll
-                confirm your place and class details.
+                Tell us about you and we&apos;ll get back to you shortly.
               </p>
 
               <div className="mt-8 space-y-4">
@@ -125,10 +124,10 @@ export default function Contact() {
                           <div key={label} className="flex items-center gap-2">
                             <span
                               className={`flex h-7 w-7 items-center justify-center text-xs font-bold transition-colors ${i < step
-                                  ? "bg-gold text-navy-deep"
-                                  : i === step
-                                    ? "border border-gold text-gold"
-                                    : "border border-white/15 text-mist/50"
+                                ? "bg-gold text-navy-deep"
+                                : i === step
+                                  ? "border border-gold text-gold"
+                                  : "border border-white/15 text-mist/50"
                                 }`}
                             >
                               {i < step ? <Check className="h-3.5 w-3.5" /> : i + 1}

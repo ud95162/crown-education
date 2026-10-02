@@ -18,7 +18,7 @@ const draw = {
 
 export default function Pillars() {
   return (
-    <section id="pillars" className="section-pad bg-navy">
+    <section id="about" className="section-pad bg-navy">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
           <span className="eyebrow justify-center">

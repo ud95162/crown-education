@@ -19,9 +19,9 @@ export default function Home() {
         <Pillars />
         <Consultancy />
         {/* <BookConsultation /> */}
-        <About />
-        <Subjects />
-        <Why />
+        {/* <About /> */}
+        {/* <Subjects /> */}
+        {/* <Why /> */}
         <Philosophy />
         <Contact />
       </main>

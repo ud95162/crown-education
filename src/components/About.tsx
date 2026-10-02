@@ -13,7 +13,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="section-pad relative overflow-hidden bg-navy-deep"
+      className="pt-12 lg:pt-16 pb-12 lg:pb-16 relative overflow-hidden bg-navy-deep"
     >
       {/* background image + overlay */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -25,41 +25,38 @@ export default function About() {
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/95 to-navy-deep/70" />
 
-      <div className="container-x relative grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="container-x relative flex flex-col items-center text-center max-w-4xl mx-auto">
         <Reveal>
-          <span className="eyebrow">
+          <span className="eyebrow justify-center">
             <span className="h-px w-8 bg-gold" />
             About the Classes
           </span>
           <h2 className="section-title mt-4">
             Structured classes built for real results
           </h2>
-          <p className="mt-5 leading-relaxed text-mist">
-            Every CrownEd class is designed around one goal — measurable
-            progress. Lessons follow a clear structure aligned to your
-            curriculum, blend theory with exam technique, and adapt to each
-            student&apos;s pace, so you always know exactly where you stand and
-            what comes next.
-          </p>
-          <a href="#contact" className="btn-gold mt-9">
-            Apply for a Class
-          </a>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <ul className="space-y-4 lg:pt-2">
+        <Reveal delay={0.1} className="w-full mt-12">
+          <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
             {FEATURES.map((f) => (
-              <li
+              <div
                 key={f}
-                className="flex items-start gap-4 border-b border-white/10 pb-4 text-snow"
+                className="group flex w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.75rem)] flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-white/10 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]"
               >
-                <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center bg-gold text-navy-deep">
-                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                <span className="flex h-12 w-12 flex-none items-center justify-center rounded-full bg-gold/10 text-gold group-hover:bg-gold group-hover:text-navy-deep transition-colors duration-300">
+                  <Check className="h-6 w-6" strokeWidth={2.5} />
                 </span>
-                <span className="text-sm leading-relaxed">{f}</span>
-              </li>
+                <span className="text-sm font-medium leading-relaxed text-mist group-hover:text-snow transition-colors duration-300">
+                  {f}
+                </span>
+              </div>
             ))}
-          </ul>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <a href="#contact" className="btn-gold">
+              Apply for a Class
+            </a>
+          </div>
         </Reveal>
       </div>
     </section>

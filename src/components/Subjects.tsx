@@ -143,7 +143,7 @@ export default function Subjects() {
   return (
     <section
       id="subjects"
-      className="section-pad relative overflow-hidden bg-navy-deep text-snow"
+      className="pt-12 lg:pt-16 pb-24 lg:pb-36 relative overflow-hidden bg-navy-deep text-snow"
     >
       {/* layered background */}
       <div className="pattern-grid pointer-events-none absolute inset-0" />
