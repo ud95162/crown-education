@@ -104,7 +104,8 @@ export default function Hero() {
                     }`}
                 >
                   <span className="eyebrow block">
-                    <span className="h-px w-8 bg-gold inline-block" />
+                    --
+                    {/* <span className="h-px w-8 bg-gold inline-block" /> */}
                     {s.eyebrow}
                   </span>
 
@@ -210,8 +211,8 @@ export default function Hero() {
           className="relative flex flex-col items-center self-end lg:items-end pt-6"
         >
           {/* geometric backdrops */}
-          <div className="hero-square-a pointer-events-none absolute bottom-20 right-6 h-[380px] w-[380px] border border-gold/25 sm:right-12 lg:h-[460px] lg:w-[460px]" />
-          <div className="hero-square-b pointer-events-none absolute bottom-36 right-20 h-[220px] w-[220px] border border-gold/15 lg:h-[280px] lg:w-[280px]" />
+          <div className="pointer-events-none absolute bottom-20 right-6 h-[380px] w-[380px] rotate-45 border border-gold/25 sm:right-12 lg:h-[460px] lg:w-[460px]" />
+          <div className="pointer-events-none absolute bottom-36 right-20 h-[220px] w-[220px] rotate-12 border border-gold/15 lg:h-[280px] lg:w-[280px]" />
           {/* glow behind subject */}
           <div className="pointer-events-none absolute bottom-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-gold/25 blur-[100px] lg:left-auto lg:right-16 lg:translate-x-0" />
 

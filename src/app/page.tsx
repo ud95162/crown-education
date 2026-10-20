@@ -21,7 +21,7 @@ export default function Home() {
         {/* <BookConsultation /> */}
         {/* <About /> */}
         {/* <Subjects /> */}
-        {/* <Why /> */}
+        <Why />
         <Philosophy />
         <Contact />
       </main>

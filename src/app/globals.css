@@ -27,9 +27,9 @@ body {
     @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10;
   }
 
-  /* generous premium section padding */
+  /* compact section padding */
   .section-pad {
-    @apply py-24 lg:py-36;
+    @apply py-14 lg:py-20;
   }
 
   .btn-gold {
@@ -108,40 +108,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .pattern-dots {
     animation: none;
-  }
-}
-
-/* Slowly counter-rotating geometric backdrops in the hero */
-.hero-square-a {
-  animation: hero-square-a-spin 55s linear infinite;
-}
-.hero-square-b {
-  animation: hero-square-b-spin 70s linear infinite;
-}
-@keyframes hero-square-a-spin {
-  from {
-    transform: rotate(45deg);
-  }
-  to {
-    transform: rotate(405deg);
-  }
-}
-@keyframes hero-square-b-spin {
-  from {
-    transform: rotate(12deg);
-  }
-  to {
-    transform: rotate(-348deg);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-square-a {
-    animation: none;
-    transform: rotate(45deg);
-  }
-  .hero-square-b {
-    animation: none;
-    transform: rotate(12deg);
   }
 }
 

@@ -60,7 +60,7 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} CrownEd. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <p>
-              Design & Developed by
+              Design & Developed by &nbsp;
               <a href="https://codexium.dev" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
                 Codexium Pvt Ltd
               </a></p>
