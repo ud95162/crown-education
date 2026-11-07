@@ -18,7 +18,7 @@ export default function ApplyPage() {
     <>
       <Navbar />
 
-      <main className="relative min-h-screen bg-navy-deep text-snow pt-28 pb-20">
+      <main className="relative min-h-screen bg-navy-deep text-snow pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
         {/* Layered Background Effects */}
         <div className="pattern-grid pointer-events-none absolute inset-0" />
         <div className="pointer-events-none absolute -left-20 top-20 h-96 w-96 rounded-full bg-gold/15 blur-[140px]" />
@@ -34,14 +34,14 @@ export default function ApplyPage() {
 
         <div className="container-x relative">
           {/* Header Banner */}
-          <div className="mx-auto max-w-3xl text-center mb-12">
+          <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-12">
             <Reveal>
               <span className="eyebrow justify-center">
                 <span className="h-px w-8 bg-gold" />
                 Admissions &amp; Registration
               </span>
               <h1 className="section-title mt-4">Student Application Form</h1>
-              <p className="mt-4 text-base sm:text-lg leading-relaxed text-mist">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg leading-relaxed text-mist">
                 Take the first step towards academic mastery and professional growth. Fill out the application form below and our team will confirm your placement.
               </p>
             </Reveal>

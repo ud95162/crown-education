@@ -71,7 +71,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-navy-gradient pt-28 text-snow"
+      className="relative overflow-hidden bg-navy-gradient pt-16 lg:pt-28 text-snow"
     >
       {/* ambient glows */}
       <div className="pointer-events-none absolute -left-40 top-10 h-[28rem] w-[28rem] rounded-full bg-gold/15 blur-[130px]" />
@@ -80,16 +80,173 @@ export default function Hero() {
       {/* Wide animated dot field spanning the hero */}
       <div className="pattern-dots pointer-events-none absolute inset-0" />
 
-      <div className="container-x grid items-end gap-10 pt-6 lg:grid-cols-2 lg:gap-6 lg:pt-16">
+      {/* ═══ Mobile layout: image as background behind title ═══ */}
+      <div className="relative lg:hidden">
+        {/* Background hero image for mobile */}
+        <div className="absolute inset-0 z-0">
+          {SLIDES.map((s, i) => {
+            const isActive = i === active;
+            return (
+              <div
+                key={i}
+                aria-hidden={!isActive}
+                className={`absolute inset-0 transition-opacity ease-out ${
+                  isActive ? "opacity-100 delay-200 duration-500" : "opacity-0 duration-200"
+                }`}
+              >
+                <Image
+                  src={s.image}
+                  alt={s.imageAlt}
+                  fill
+                  priority={i === 0}
+                  className="object-cover object-top"
+                />
+              </div>
+            );
+          })}
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/80 via-navy-deep/70 to-navy-deep/95" />
+        </div>
+
+        {/* Mobile content */}
+        <div className="container-x relative z-10 pb-8 pt-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Title slides */}
+            <div className="grid">
+              {SLIDES.map((s, i) => {
+                const isActive = i === active;
+                return (
+                  <div
+                    key={i}
+                    style={{ gridArea: "1 / 1" }}
+                    aria-hidden={!isActive}
+                    className={`transition-all ease-out ${
+                      isActive
+                        ? "translate-y-0 opacity-100 delay-200 duration-500"
+                        : "pointer-events-none translate-y-4 opacity-0 duration-200"
+                    }`}
+                  >
+                    <span className="eyebrow block">
+                      --
+                      {/* <span className="h-px w-8 bg-gold inline-block" /> */}
+                      {s.eyebrow}
+                    </span>
+
+                    <h1 className="mt-5 uppercase font-display text-3xl font-bold leading-[0.98] tracking-tight sm:text-5xl">
+                      {s.title}
+                    </h1>
+
+                    <p className="mt-6 max-w-lg text-base leading-relaxed text-mist sm:text-lg">
+                      {s.description}
+                    </p>
+
+                    <div className="mt-9 flex flex-wrap items-center gap-4">
+                      <a
+                        href="#consultation"
+                        className="btn-gold uppercase flex items-center gap-2 shadow-gold transition-transform duration-200 hover:scale-105"
+                      >
+                        Book Free Consultation
+                      </a>
+                      <a
+                        href="/apply"
+                        className="btn-outline uppercase flex items-center gap-2"
+                      >
+                        Apply for Class
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Stats — below the title on mobile */}
+            <div className="mt-8 rounded-2xl border border-white/10 bg-navy-deep/70 backdrop-blur-md px-4 py-3">
+              <Stats />
+            </div>
+
+            {/* Mini-Screen Slide Switchers */}
+            <div className="mt-6">
+              <div className="grid max-w-lg grid-cols-1 gap-3 sm:grid-cols-2">
+                {SLIDES.map((s, i) => {
+                  const isActive = i === active;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActive(i)}
+                      className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border p-2 text-left transition-all duration-300 ${
+                        isActive
+                          ? "border-gold/80 bg-navy-surface/95 shadow-[0_4px_24px_rgba(212,175,55,0.25)] ring-1 ring-gold/40 scale-[1.02]"
+                          : "border-white/10 bg-navy-surface/40 opacity-70 hover:border-white/30 hover:opacity-100"
+                      }`}
+                    >
+                      {/* Mini-screen visual container */}
+                      <div className="relative h-12 w-14 sm:h-14 sm:w-16 flex-shrink-0 overflow-hidden rounded-lg border border-white/15 bg-navy-deep">
+                        {/* Screen bezel reflection */}
+                        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-navy-deep/80 via-transparent to-white/10" />
+                        <Image
+                          src={s.image}
+                          alt={s.shortTitle}
+                          fill
+                          sizes="64px"
+                          className={`object-cover object-top transition-transform duration-500 ${
+                            isActive ? "scale-110" : "scale-100 group-hover:scale-105"
+                          }`}
+                        />
+                        {/* Screen active indicator dot */}
+                        <span
+                          className={`absolute right-1.5 top-1.5 z-20 h-2 w-2 rounded-full ${
+                            isActive
+                              ? "bg-gold shadow-[0_0_8px_#D4AF37] animate-pulse"
+                              : "bg-white/30"
+                          }`}
+                        />
+                      </div>
+
+                      {/* Mini-screen text content */}
+                      <div className="min-w-0 flex-1 pr-1">
+                        <div className="truncate text-xs font-bold text-snow sm:text-sm">
+                          {s.shortTitle}
+                        </div>
+                        <div className="truncate text-[10px] text-mist/80 sm:text-[11px]">
+                          {s.shortDesc}
+                        </div>
+                      </div>
+
+                      {/* Progress bar for the active mini-screen */}
+                      {isActive && (
+                        <div className="absolute bottom-0 left-0 right-0 h-0.5 overflow-hidden bg-white/10">
+                          <motion.div
+                            key={`progress-mob-${active}`}
+                            initial={{ width: "0%" }}
+                            animate={{ width: "100%" }}
+                            transition={{ duration: 6, ease: "linear" }}
+                            className="h-full bg-gold-gradient shadow-gold"
+                          />
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ═══ Desktop layout: original two-column grid ═══ */}
+      <div className="container-x hidden lg:grid items-end gap-6 pt-16 lg:grid-cols-2">
         {/* Left copy */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 pb-10 lg:pb-16"
+          className="relative z-10 pb-16"
         >
-          {/* All slides share one grid cell, so the block is always as tall
-              as the tallest slide — the portrait on the right never shifts. */}
           <div className="grid">
             {SLIDES.map((s, i) => {
               const isActive = i === active;
@@ -98,10 +255,11 @@ export default function Hero() {
                   key={i}
                   style={{ gridArea: "1 / 1" }}
                   aria-hidden={!isActive}
-                  className={`transition-all ease-out ${isActive
-                    ? "translate-y-0 opacity-100 delay-200 duration-500"
-                    : "pointer-events-none translate-y-4 opacity-0 duration-200"
-                    }`}
+                  className={`transition-all ease-out ${
+                    isActive
+                      ? "translate-y-0 opacity-100 delay-200 duration-500"
+                      : "pointer-events-none translate-y-4 opacity-0 duration-200"
+                  }`}
                 >
                   <span className="eyebrow block">
                     --
@@ -138,8 +296,7 @@ export default function Hero() {
 
           {/* Mini-Screen Slide Switchers */}
           <div className="mt-8">
-
-            <div className="grid max-w-lg grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="grid max-w-lg grid-cols-2 gap-3">
               {SLIDES.map((s, i) => {
                 const isActive = i === active;
                 return (
@@ -147,13 +304,14 @@ export default function Hero() {
                     key={i}
                     type="button"
                     onClick={() => setActive(i)}
-                    className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border p-2 text-left transition-all duration-300 ${isActive
-                      ? "border-gold/80 bg-navy-surface/95 shadow-[0_4px_24px_rgba(212,175,55,0.25)] ring-1 ring-gold/40 scale-[1.02]"
-                      : "border-white/10 bg-navy-surface/40 opacity-70 hover:border-white/30 hover:opacity-100"
-                      }`}
+                    className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border p-2 text-left transition-all duration-300 ${
+                      isActive
+                        ? "border-gold/80 bg-navy-surface/95 shadow-[0_4px_24px_rgba(212,175,55,0.25)] ring-1 ring-gold/40 scale-[1.02]"
+                        : "border-white/10 bg-navy-surface/40 opacity-70 hover:border-white/30 hover:opacity-100"
+                    }`}
                   >
                     {/* Mini-screen visual container */}
-                    <div className="relative h-12 w-14 sm:h-14 sm:w-16 flex-shrink-0 overflow-hidden rounded-lg border border-white/15 bg-navy-deep">
+                    <div className="relative h-14 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-white/15 bg-navy-deep">
                       {/* Screen bezel reflection */}
                       <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-navy-deep/80 via-transparent to-white/10" />
                       <Image
@@ -161,24 +319,26 @@ export default function Hero() {
                         alt={s.shortTitle}
                         fill
                         sizes="64px"
-                        className={`object-cover object-top transition-transform duration-500 ${isActive ? "scale-110" : "scale-100 group-hover:scale-105"
-                          }`}
+                        className={`object-cover object-top transition-transform duration-500 ${
+                          isActive ? "scale-110" : "scale-100 group-hover:scale-105"
+                        }`}
                       />
                       {/* Screen active indicator dot */}
                       <span
-                        className={`absolute right-1.5 top-1.5 z-20 h-2 w-2 rounded-full ${isActive
-                          ? "bg-gold shadow-[0_0_8px_#D4AF37] animate-pulse"
-                          : "bg-white/30"
-                          }`}
+                        className={`absolute right-1.5 top-1.5 z-20 h-2 w-2 rounded-full ${
+                          isActive
+                            ? "bg-gold shadow-[0_0_8px_#D4AF37] animate-pulse"
+                            : "bg-white/30"
+                        }`}
                       />
                     </div>
 
                     {/* Mini-screen text content */}
                     <div className="min-w-0 flex-1 pr-1">
-                      <div className="truncate text-xs font-bold text-snow sm:text-sm">
+                      <div className="truncate text-sm font-bold text-snow">
                         {s.shortTitle}
                       </div>
-                      <div className="truncate text-[10px] text-mist/80 sm:text-[11px]">
+                      <div className="truncate text-[11px] text-mist/80">
                         {s.shortDesc}
                       </div>
                     </div>
@@ -208,25 +368,25 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex flex-col items-center self-end lg:items-end pt-6"
+          className="relative flex flex-col items-end self-end pt-6"
         >
           {/* geometric backdrops */}
           <div className="pointer-events-none absolute bottom-20 right-6 h-[380px] w-[380px] rotate-45 border border-gold/25 sm:right-12 lg:h-[460px] lg:w-[460px]" />
           <div className="pointer-events-none absolute bottom-36 right-20 h-[220px] w-[220px] rotate-12 border border-gold/15 lg:h-[280px] lg:w-[280px]" />
           {/* glow behind subject */}
-          <div className="pointer-events-none absolute bottom-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-gold/25 blur-[100px] lg:left-auto lg:right-16 lg:translate-x-0" />
+          <div className="pointer-events-none absolute bottom-0 right-16 h-[320px] w-[320px] rounded-full bg-gold/25 blur-[100px]" />
 
-          {/* Portrait crossfades with the active slide; fixed height keeps
-              the layout steady. */}
-          <div className="relative z-10 h-[480px] w-full leading-none lg:h-[580px]">
+          {/* Portrait crossfades with the active slide */}
+          <div className="relative z-10 h-[580px] w-full leading-none">
             {SLIDES.map((s, i) => {
               const isActive = i === active;
               return (
                 <div
                   key={i}
                   aria-hidden={!isActive}
-                  className={`absolute bottom-0 left-1/2 flex -translate-x-1/2 items-end transition-opacity ease-out lg:left-auto lg:right-0 lg:translate-x-0 ${isActive ? "opacity-100 delay-200 duration-500" : "opacity-0 duration-200"
-                    }`}
+                  className={`absolute bottom-0 right-0 flex items-end transition-opacity ease-out ${
+                    isActive ? "opacity-100 delay-200 duration-500" : "opacity-0 duration-200"
+                  }`}
                 >
                   <Image
                     src={s.image}
@@ -234,7 +394,7 @@ export default function Hero() {
                     width={560}
                     height={1016}
                     priority={i === 0}
-                    className="block max-h-[480px] w-auto align-bottom object-contain object-bottom drop-shadow-[0_25px_45px_rgba(0,0,0,0.5)] lg:max-h-[620px]"
+                    className="block max-h-[620px] w-auto align-bottom object-contain object-bottom drop-shadow-[0_25px_45px_rgba(0,0,0,0.5)]"
                   />
                 </div>
               );
@@ -247,9 +407,9 @@ export default function Hero() {
             </div>
           </div>
 
-
         </motion.div>
       </div>
     </section>
   );
 }
+

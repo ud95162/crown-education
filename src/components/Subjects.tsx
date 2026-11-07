@@ -26,8 +26,16 @@ import {
   Dna,
   Zap,
   ShoppingBag,
+  GraduationCap,
+  Globe,
 } from "lucide-react";
 import { SUBJECT_FILTERS } from "@/lib/content";
+
+const CURRICULUM_ICONS: Record<string, React.ElementType> = {
+  local: GraduationCap,
+  uk: Globe,
+  pro: Briefcase,
+};
 
 const SUBJECT_ICONS: Record<string, React.ElementType> = {
   "Information Technology": Laptop,
@@ -170,8 +178,8 @@ export default function Subjects() {
           </p>
         </div>
 
-        {/* Curriculum Tabs */}
-        <div className="mt-10 flex justify-center">
+        {/* Curriculum Tabs — Desktop: horizontal pills */}
+        <div className="mt-10 hidden md:flex justify-center">
           <div
             role="tablist"
             aria-label="Curriculum pathways"
@@ -200,11 +208,67 @@ export default function Subjects() {
                     />
                   )}
                   {f.label}
-                  <span className={`ml-2 hidden text-xs font-normal sm:inline ${
-                    selected ? "text-navy-deep/70" : "text-mist/60"
-                  }`}>
-                    ({f.subjects.length})
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Curriculum Tabs — Mobile: vertical stacked list */}
+        <div className="mt-8 md:hidden">
+          <div
+            role="tablist"
+            aria-label="Curriculum pathways"
+            className="flex flex-col gap-2"
+          >
+            {SUBJECT_FILTERS.map((f, i) => {
+              const selected = i === active;
+              const Icon = CURRICULUM_ICONS[f.key] ?? BookOpen;
+              return (
+                <button
+                  key={f.key}
+                  role="tab"
+                  aria-selected={selected}
+                  onClick={() => {
+                    setActive(i);
+                    if (scrollRef.current) scrollRef.current.scrollLeft = 0;
+                  }}
+                  className={`relative flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-200 ${
+                    selected
+                      ? "border-gold/60 bg-gold/10 shadow-[0_0_20px_rgba(212,175,55,0.12)]"
+                      : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                  }`}
+                >
+                  <span
+                    className={`flex h-10 w-10 flex-none items-center justify-center rounded-lg transition-colors ${
+                      selected
+                        ? "bg-gold text-navy-deep"
+                        : "border border-gold/30 bg-gold/10 text-gold"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
                   </span>
+                  <div className="min-w-0 flex-1">
+                    <div>
+                      <span
+                        className={`text-sm font-bold ${
+                          selected ? "text-gold" : "text-snow"
+                        }`}
+                      >
+                        {f.label}
+                      </span>
+                    </div>
+                    <p
+                      className={`mt-0.5 text-xs leading-snug ${
+                        selected ? "text-gold/70" : "text-mist/60"
+                      }`}
+                    >
+                      {f.caption}
+                    </p>
+                  </div>
+                  {selected && (
+                    <span className="h-5 w-1 flex-none rounded-full bg-gold" />
+                  )}
                 </button>
               );
             })}
@@ -216,11 +280,8 @@ export default function Subjects() {
             {/* Row Navigation Bar */}
             <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
               <div>
-                <h3 className="font-display text-xl font-bold text-snow flex items-center gap-2">
+                <h3 className="font-display text-xl font-bold text-snow">
                   {filter.label} Curriculum
-                  <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-xs font-normal text-gold">
-                    {filter.subjects.length} Offerings
-                  </span>
                 </h3>
                 <p className="text-xs text-mist">{filter.caption}</p>
               </div>
@@ -275,14 +336,9 @@ export default function Subjects() {
                         className="group card-surface relative flex h-[280px] w-72 flex-none flex-col justify-between overflow-hidden rounded-xl border border-white/10 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-lift sm:w-80"
                       >
                         <div>
-                          <div className="flex items-center justify-between">
-                            <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-gold/30 bg-gold/10 text-gold group-hover:bg-gold group-hover:text-navy-deep transition-colors">
-                              <IconComponent className="h-5 w-5" />
-                            </span>
-                            <span className="text-xs font-mono text-mist/40">
-                              #{String(si + 1).padStart(2, "0")}
-                            </span>
-                          </div>
+                          <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-gold/30 bg-gold/10 text-gold group-hover:bg-gold group-hover:text-navy-deep transition-colors">
+                            <IconComponent className="h-5 w-5" />
+                          </span>
 
                           <h4 className="mt-4 font-display text-lg font-bold leading-snug text-snow group-hover:text-gold transition-colors">
                             {s}
@@ -292,11 +348,7 @@ export default function Subjects() {
                           </p>
                         </div>
 
-                        <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
-                          <span className="inline-flex items-center gap-1.5 text-xs text-gold">
-                            <CheckCircle2 className="h-3.5 w-3.5" />
-                            {filter.label} Grouped
-                          </span>
+                        <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-end">
                           <a
                             href="/apply"
                             className="text-xs font-semibold text-snow hover:text-gold transition-colors underline decoration-gold/40 underline-offset-4"
@@ -311,25 +363,6 @@ export default function Subjects() {
               </AnimatePresence>
             </div>
           </div>
-
-        {/* Footer summary badges */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-3 border-t border-white/10 pt-8 text-sm">
-          <span className="text-xs uppercase tracking-wider text-mist/60">
-            Curriculum Pathways
-          </span>
-          {SUBJECT_FILTERS.map((f, i) => (
-            <button
-              key={f.key}
-              onClick={() => {
-                setActive(i);
-                if (scrollRef.current) scrollRef.current.scrollLeft = 0;
-              }}
-              className="border border-gold/40 px-4 py-1.5 text-gold-light hover:bg-gold hover:text-navy-deep transition-colors text-xs font-semibold"
-            >
-              {f.label} ({f.subjects.length} subjects)
-            </button>
-          ))}
-        </div>
       </div>
     </section>
   );
