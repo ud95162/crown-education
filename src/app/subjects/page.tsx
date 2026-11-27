@@ -14,7 +14,7 @@ export default function SubjectsPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-navy-deep text-snow">
+      <main className="overflow-x-hidden bg-navy-deep text-snow">
         {/* top spacing so content clears the fixed navbar */}
         <div className="pt-16 sm:pt-20 lg:pt-24" />
         <About />

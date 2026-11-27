@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import Reveal from "./Reveal";
+import FeatureCarousel from "./FeatureCarousel";
 
 const FEATURES = [
   "Small-group & one-to-one sessions for focused attention",
@@ -37,7 +38,11 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={0.1} className="w-full mt-12">
-          <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+          {/* Mobile: carousel */}
+          <FeatureCarousel items={FEATURES} />
+
+          {/* Desktop: wrapped grid */}
+          <div className="hidden flex-wrap justify-center gap-4 max-w-5xl mx-auto sm:flex">
             {FEATURES.map((f) => (
               <div
                 key={f}

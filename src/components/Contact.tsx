@@ -88,25 +88,9 @@ export default function Contact() {
                 Tell us about you and we&apos;ll get back to you shortly.
               </p>
 
-              <div className="mt-8 space-y-4">
-                <Row
-                  icon={Phone}
-                  label="Phone / WhatsApp"
-                  value={CONTACT_PHONE}
-                  href={`tel:${CONTACT_PHONE.replace(/\s+/g, "")}`}
-                />
-                <Row
-                  icon={Mail}
-                  label="Email"
-                  value={CONTACT_EMAIL}
-                  href={`mailto:${CONTACT_EMAIL}`}
-                />
-                <Row icon={MapPin} label="Location" value="Colombo, Sri Lanka" />
-              </div>
-
-              <div className="mt-8 inline-flex items-center gap-2 text-xs text-mist/70">
-                <ShieldCheck className="h-4 w-4 text-gold" />
-                Your details are kept private &amp; never shared.
+              {/* Contact details — on desktop they sit in the left column */}
+              <div className="mt-8 hidden lg:block">
+                <ContactDetails />
               </div>
             </Reveal>
 
@@ -248,10 +232,42 @@ export default function Contact() {
                 )}
               </div>
             </Reveal>
+
+            {/* Contact details — on mobile they appear below the form */}
+            <div className="lg:hidden">
+              <ContactDetails />
+            </div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactDetails() {
+  return (
+    <>
+      <div className="space-y-4">
+        <Row
+          icon={Phone}
+          label="Phone / WhatsApp"
+          value={CONTACT_PHONE}
+          href={`tel:${CONTACT_PHONE.replace(/\s+/g, "")}`}
+        />
+        <Row
+          icon={Mail}
+          label="Email"
+          value={CONTACT_EMAIL}
+          href={`mailto:${CONTACT_EMAIL}`}
+        />
+        <Row icon={MapPin} label="Location" value="Colombo, Sri Lanka" />
+      </div>
+
+      <div className="mt-8 inline-flex items-center gap-2 text-xs text-mist/70">
+        <ShieldCheck className="h-4 w-4 text-gold" />
+        Your details are kept private &amp; never shared.
+      </div>
+    </>
   );
 }
 

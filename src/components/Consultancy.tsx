@@ -173,7 +173,18 @@ export default function Consultancy() {
   const [isHovered, setIsHovered] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const chipBarRef = useRef<HTMLDivElement>(null);
+  const chipRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const filter = CONSULTANCY_FILTERS[active];
+
+  // Keep the selected mobile chip centred in view
+  useEffect(() => {
+    const chip = chipRefs.current[active];
+    const bar = chipBarRef.current;
+    if (!chip || !bar) return;
+    const target = chip.offsetLeft - bar.clientWidth / 2 + chip.clientWidth / 2;
+    bar.scrollTo({ left: target, behavior: "smooth" });
+  }, [active]);
 
   const handleScroll = useCallback((direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -267,12 +278,14 @@ export default function Consultancy() {
           </div>
         </div>
 
-        {/* Service Area Tabs — Mobile: vertical stacked list */}
+        {/* Service Area Tabs — Mobile: horizontal scrollable chip bar */}
         <div className="mt-8 md:hidden">
           <div
+            ref={chipBarRef}
             role="tablist"
             aria-label="Consultancy service areas"
-            className="flex flex-col gap-2"
+            className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1"
+            style={{ scrollSnapType: "x proximity" }}
           >
             {CONSULTANCY_FILTERS.map((f, i) => {
               const selected = i === active;
@@ -280,48 +293,24 @@ export default function Consultancy() {
               return (
                 <button
                   key={f.key}
+                  ref={(el) => {
+                    chipRefs.current[i] = el;
+                  }}
                   role="tab"
                   aria-selected={selected}
                   onClick={() => {
                     setActive(i);
                     if (scrollRef.current) scrollRef.current.scrollLeft = 0;
                   }}
-                  className={`relative flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-200 ${
+                  style={{ scrollSnapAlign: "center" }}
+                  className={`flex flex-none items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
                     selected
-                      ? "border-gold/60 bg-gold/10 shadow-[0_0_20px_rgba(212,175,55,0.12)]"
-                      : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                      ? "border-gold bg-gold-gradient text-navy-deep shadow-[0_0_20px_rgba(212,175,55,0.25)]"
+                      : "border-white/10 bg-white/[0.04] text-mist hover:border-white/25"
                   }`}
                 >
-                  <span
-                    className={`flex h-10 w-10 flex-none items-center justify-center rounded-lg transition-colors ${
-                      selected
-                        ? "bg-gold text-navy-deep"
-                        : "border border-gold/30 bg-gold/10 text-gold"
-                    }`}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div>
-                      <span
-                        className={`text-sm font-bold ${
-                          selected ? "text-gold" : "text-snow"
-                        }`}
-                      >
-                        {f.label}
-                      </span>
-                    </div>
-                    <p
-                      className={`mt-0.5 text-xs leading-snug ${
-                        selected ? "text-gold/70" : "text-mist/60"
-                      }`}
-                    >
-                      {f.caption}
-                    </p>
-                  </div>
-                  {selected && (
-                    <span className="h-5 w-1 flex-none rounded-full bg-gold" />
-                  )}
+                  <Icon className="h-4 w-4 flex-none" />
+                  <span className="whitespace-nowrap">{f.label}</span>
                 </button>
               );
             })}

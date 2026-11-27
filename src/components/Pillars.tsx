@@ -127,7 +127,7 @@ export default function Pillars() {
 
                   <div className="mt-6 border-t border-white/10 pt-4">
                     <a
-                      href="#consultation"
+                      href="/consult"
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold transition-colors hover:text-gold-light group-hover:underline"
                     >
                       <span>Book Consultation for this Track</span>

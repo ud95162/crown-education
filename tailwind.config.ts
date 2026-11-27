@@ -49,9 +49,19 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        shimmer: {
+          "0%": { transform: "translateX(-150%) skewX(-12deg)" },
+          "60%, 100%": { transform: "translateX(260%) skewX(-12deg)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(212,175,55,0.0)" },
+          "50%": { boxShadow: "0 0 18px 3px rgba(212,175,55,0.45)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.7s ease-out forwards",
+        shimmer: "shimmer 3s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 2.4s ease-in-out infinite",
       },
     },
   },

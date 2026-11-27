@@ -111,7 +111,7 @@ export default function Why() {
               Your vision, your ambition, your legacy. We&apos;re here to crown you.
             </p>
 
-            <a href="#consultation" className="btn-outline mt-8 self-start">
+            <a href="/consult" className="btn-outline mt-8 self-start">
               Book a Consultation
             </a>
           </motion.div>
@@ -123,7 +123,7 @@ export default function Why() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-14 text-center font-display text-2xl font-bold text-snow sm:text-3xl"
+          className="mt-14 hidden text-center font-display text-2xl font-bold text-snow sm:block sm:text-3xl"
         >
           Your crown awaits.
         </motion.p>

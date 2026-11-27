@@ -94,12 +94,11 @@ export default function Navbar() {
               </a>
               <a
                 href="/consult"
-                className="btn-gold relative whitespace-nowrap px-4 py-2 text-xs font-bold uppercase tracking-wider shadow-gold transition-all duration-200 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.6)]"
+                className="btn-gold group relative overflow-hidden whitespace-nowrap px-4 py-2 text-xs font-bold uppercase tracking-wider shadow-gold animate-pulse-glow transition-all duration-200 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.6)]"
               >
-                <span className="relative z-10 flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy-deep animate-ping" />
-                  Request a Consultation
-                </span>
+                {/* sweeping sheen highlight */}
+                <span className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shimmer" />
+                <span className="relative z-10">Request a Consultation</span>
               </a>
             </div>
           </div>
@@ -112,7 +111,7 @@ export default function Navbar() {
           <a href="/" aria-label="CrownEd home" className="flex items-center justify-center">
             <Logo
               variant="light"
-              imgClassName="h-10 w-auto"
+              imgClassName="h-14 w-auto transition-all duration-300"
             />
           </a>
 
